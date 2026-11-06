@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>sip2O — Pure Hydration</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        primary: '#68ffed',
+        'primary-container': '#0ce4d1',
+        'on-primary': '#003732',
+        'on-primary-container': '#006158',
+        surface: '#08141f',
+        'surface-dim': '#040f19',
+        'surface-container': '#15212c',
+        'surface-container-low': '#111d27',
+        'surface-container-high': '#202b36',
+        'surface-container-highest': '#2a3642',
+        'on-surface': '#d8e4f3',
+        'on-surface-variant': '#b9cac6',
+        tertiary: '#8afaff',
+        'tertiary-container': '#5fdee4',
+        outline: '#849491',
+        'outline-variant': '#3b4a47',
+      },
+    }
+  }
+};
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: #08141f;
+    color: #d8e4f3;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #040f19; }
+  ::-webkit-scrollbar-thumb { background: #0ce4d1; border-radius: 9999px; }
+
+  /* ── Reveal on scroll ──────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.12s; }
+  .reveal-delay-2 { transition-delay: 0.24s; }
+  .reveal-delay-3 { transition-delay: 0.38s; }
+
+  /* ═══ BOTTLE IMAGE LAYER ═══════════════════════ */
+  #bottle-stage {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 25;           /* ABOVE sections (20), below nav (50) */
+    pointer-events: none;
+    overflow: hidden;
+  }
+  #bottle-stage img {
+    position: absolute;
+    height: 72vh;
+    max-height: 700px;
+    width: auto;
+    object-fit: contain;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5))
+            drop-shadow(0 0 30px rgba(12,228,209,0.1));
+  }
+  /* Fade out the dark JPG background edges with a radial mask */
+  #img-hero {
+    -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 48%, black 45%, transparent 78%);
+    mask-image: radial-gradient(ellipse 70% 75% at 50% 48%, black 45%, transparent 78%);
+  }
+
+  /* ── Ambient glows ─────────────────────────── */
+  .glow-blob {
+    position: fixed;
+    border-radius: 9999px;
+    filter: blur(130px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Nav ───────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    background: rgba(8,20,31,0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #d8e4f3;
+    text-decoration: none;
+  }
+  .nav-logo span { color: #0ce4d1; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #b9cac6;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #68ffed; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.5rem;
+    border-radius: 9999px;
+    background: #0ce4d1;
+    color: #003732;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 24px rgba(12,228,209,0.5);
+  }
+
+  /* ── Scroll progress ──────────────────────── */
+  #scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0ce4d1, #68ffed);
+    z-index: 100;
+    width: 0%;
+    box-shadow: 0 0 10px #0ce4d1;
+  }
+
+  /* ── Section ───────────────────────────────── */
+  .section {
+    position: relative;
+    z-index: 20;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 3rem;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  /* ── Cards ─────────────────────────────────── */
+  .stat-card {
+    background: rgba(21,33,44,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0ce4d1;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: #b9cac6; margin-top: 2px;
+  }
+  .feature-pill {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.4rem 1rem; border-radius: 9999px;
+    background: rgba(12,228,209,0.08);
+    border: 1px solid rgba(12,228,209,0.2);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: #68ffed;
+  }
+  .feature-pill .dot {
+    width: 6px; height: 6px; border-radius: 9999px;
+    background: #0ce4d1; box-shadow: 0 0 8px #0ce4d1;
+  }
+  .spec-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .glass-card {
+    background: rgba(17,29,39,0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 1.5rem;
+  }
+  .finish-btn {
+    padding: 0.9rem 1rem; border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(21,33,44,0.6); cursor: pointer;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.5rem; transition: all 0.25s; color: #d8e4f3;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .finish-btn:hover, .finish-btn.active {
+    border-color: #0ce4d1;
+    background: rgba(12,228,209,0.1);
+    box-shadow: 0 0 16px rgba(12,228,209,0.2);
+  }
+  .finish-swatch { width: 36px; height: 36px; border-radius: 9999px; }
+
+  /* ── Chapter dots ──────────────────────────── */
+  #chapter-dots {
+    position: fixed; right: 2rem; top: 50%;
+    transform: translateY(-50%); z-index: 40;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .cdot {
+    width: 6px; height: 6px; border-radius: 9999px;
+    background: rgba(132,148,145,0.4);
+    transition: all 0.3s; cursor: pointer;
+  }
+  .cdot.active {
+    background: #0ce4d1; height: 20px;
+    box-shadow: 0 0 8px #0ce4d1;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .section { padding: 5rem 1.25rem; }
+    #chapter-dots { display: none; }
+    #bottle-stage img { height: 45vh; max-height: 400px; }
+  }
+</style>
+</head>
+<body class="dark">
+
+<!-- Scroll progress -->
+<div id="scroll-progress"></div>
+
+<!-- Chapter dots -->
+<div id="chapter-dots">
+  <div class="cdot active" data-target="hero"></div>
+  <div class="cdot" data-target="performance"></div>
+  <div class="cdot" data-target="purity"></div>
+  <div class="cdot" data-target="configure"></div>
+</div>
+
+<!-- Ambient glows -->
+<div class="glow-blob" style="width:600px;height:600px;top:5%;left:-15%;background:rgba(12,228,209,0.07);"></div>
+<div class="glow-blob" style="width:700px;height:700px;bottom:10%;right:-20%;background:rgba(138,250,255,0.04);"></div>
+
+<!-- ═══ BOTTLE IMAGE STAGE (scroll-animated) ═════════════ -->
+<div id="bottle-stage">
+  <img id="img-hero" src="bottle-hero.jpg" alt="sip2O Bottle" />
+  <img id="img-exploded" src="bottle-exploded.png" alt="sip2O Exploded View" style="opacity:0;" />
+</div>
+
+<!-- ═══ NAV ══════════════════════════════════════════════ -->
+<nav>
+  <a class="nav-logo" href="#">sip<span>2O</span></a>
+  <div class="nav-links">
+    <a href="#performance">Performance</a>
+    <a href="#purity">Purity</a>
+    <a href="#configure">Configure</a>
+  </div>
+  <a class="btn-primary" href="#configure">Pre-Order</a>
+</nav>
+
+<!-- ═══ SECTION 1: HERO ═══════════════════════════════════ -->
+<section id="hero" class="section" style="min-height:100vh;">
+  <div style="max-width:540px;">
+    <div class="feature-pill reveal" style="margin-bottom:1.5rem;">
+      <span class="dot"></span> Ti-6Al-4V Aerospace Titanium
+    </div>
+    <h1 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(42px,6vw,72px);font-weight:700;line-height:1.05;letter-spacing:-0.03em;margin:0 0 1.5rem;">
+      Pure Water.<br>Engineered<br><span style="color:#0ce4d1;">Perfectly.</span>
+    </h1>
+    <p class="reveal reveal-delay-2" style="font-size:16px;line-height:1.65;color:#b9cac6;max-width:400px;margin:0 0 2.5rem;">
+      Titanium construction. UV-C self-purification. 36-hour thermal lock. Zero compromise.
+    </p>
+    <div class="reveal reveal-delay-3" style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+      <a class="btn-primary" href="#configure">Pre-Order — $349</a>
+      <a href="#performance" style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#849491;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#68ffed'" onmouseout="this.style.color='#849491'">Explore ↓</a>
+    </div>
+    <div class="reveal reveal-delay-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-top:3.5rem;">
+      <div class="stat-card">
+        <div class="stat-num">36h</div>
+        <div class="stat-label">Ice Retention</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:#8afaff;">99.9%</div>
+        <div class="stat-label">Pathogen Kill</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:#d8e4f3;">0g</div>
+        <div class="stat-label">Microplastic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: PERFORMANCE ════════════════════════════ -->
+<section id="performance" class="section" style="justify-content:flex-end;">
+  <div style="max-width:460px;width:100%;">
+    <div class="feature-pill reveal" style="margin-bottom:1.25rem;color:#8afaff;border-color:rgba(138,250,255,0.25);background:rgba(138,250,255,0.06);">
+      <span class="dot" style="background:#8afaff;box-shadow:0 0 8px #8afaff;"></span> Cryo-Shield Vacuum Core
+    </div>
+    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.025em;margin:0 0 1.25rem;">
+      Temperature<br>held hostage.
+    </h2>
+    <div class="glass-card reveal reveal-delay-2" style="margin-bottom:1.5rem;">
+      <div class="spec-row">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#b9cac6;">Dual-wall vacuum</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">0.0001 Torr</span>
+      </div>
+      <div class="spec-row">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#b9cac6;">Cold retention</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">36+ hours</span>
+      </div>
+      <div class="spec-row">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#b9cac6;">Hot retention</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">18 hours</span>
+      </div>
+      <div class="spec-row">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#b9cac6;">Exterior sweat</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">Zero</span>
+      </div>
+    </div>
+    <p class="reveal reveal-delay-3" style="font-size:14px;line-height:1.7;color:#849491;">
+      Copper vapor deposition reflects radiant infrared. Triple-stage aerospace annealing. No kinetic heat transfer.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: PURITY ══════════════════════════════════ -->
+<section id="purity" class="section" style="justify-content:flex-start;">
+  <div style="max-width:460px;width:100%;">
+    <div class="feature-pill reveal" style="margin-bottom:1.25rem;">
+      <span class="dot"></span> Hydration OS + 280nm UV-C
+    </div>
+    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.025em;margin:0 0 1.25rem;">
+      Sterile.<br>Always.
+    </h2>
+    <div class="glass-card reveal reveal-delay-2" style="margin-bottom:1rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#b9cac6;">UV-C Photonic Sterilization</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;padding:2px 10px;border-radius:9999px;background:rgba(12,228,209,0.12);color:#0ce4d1;letter-spacing:0.06em;text-transform:uppercase;">Active</span>
+      </div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;color:#8afaff;letter-spacing:-0.02em;">99.9%</div>
+      <div style="font-size:11px;color:#849491;margin-top:2px;text-transform:uppercase;letter-spacing:0.06em;">Pathogen elimination per cycle</div>
+      <div style="margin-top:1rem;height:3px;border-radius:9999px;background:rgba(255,255,255,0.08);overflow:hidden;">
+        <div id="uv-track" style="height:100%;width:0%;background:linear-gradient(90deg,#0ce4d1,#8afaff);border-radius:9999px;box-shadow:0 0 10px #0ce4d1;transition:width 1.5s cubic-bezier(.22,1,.36,1);"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;color:#849491;text-transform:uppercase;">
+        <span>Cycle: 60s pulse</span><span>Next: 42 min</span>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-3" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+      <span class="feature-pill" style="font-size:9px;">Bluetooth 5.4 LE</span>
+      <span class="feature-pill" style="font-size:9px;">Apple Health</span>
+      <span class="feature-pill" style="font-size:9px;">Garmin Connect</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: CONFIGURE ══════════════════════════════ -->
+<section id="configure" class="section" style="justify-content:center;flex-direction:column;align-items:center;text-align:center;">
+  <div style="max-width:580px;width:100%;">
+    <div class="feature-pill reveal" style="margin:0 auto 1.25rem;">
+      <span class="dot"></span> Bespoke Configuration
+    </div>
+    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.025em;margin:0 0 0.75rem;">
+      Make it yours.
+    </h2>
+    <p class="reveal reveal-delay-2" style="font-size:15px;color:#849491;margin:0 0 2.5rem;line-height:1.6;">
+      Choose your finish. Reserve your edition.
+    </p>
+    <div class="reveal reveal-delay-2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:2rem;">
+      <button class="finish-btn active" onclick="selectFinish(this)">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#0a1620,#1a2f42);"></span>
+        Obsidian
+      </button>
+      <button class="finish-btn" onclick="selectFinish(this)">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#0ce4d1,#38e1ff);box-shadow:0 0 12px rgba(12,228,209,0.5);"></span>
+        Cyber Cyan
+      </button>
+      <button class="finish-btn" onclick="selectFinish(this)">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#c0d8e4,#f4fafb);"></span>
+        Glacier
+      </button>
+      <button class="finish-btn" onclick="selectFinish(this)">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#6b7a88,#b0bec5);"></span>
+        Raw Ti
+      </button>
+    </div>
+    <div class="reveal reveal-delay-3" style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2rem;">
+      <button id="vol-650" onclick="selectVol(650)" style="padding:1.1rem 1rem;border-radius:16px;border:1px solid #0ce4d1;background:rgba(12,228,209,0.08);cursor:pointer;text-align:left;transition:all 0.25s;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#d8e4f3;">650 ml</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#849491;margin-top:2px;">Standard EDC — $349</div>
+      </button>
+      <button id="vol-950" onclick="selectVol(950)" style="padding:1.1rem 1rem;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:rgba(21,33,44,0.6);cursor:pointer;text-align:left;transition:all 0.25s;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#d8e4f3;">950 ml</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#849491;margin-top:2px;">Expedition — $364</div>
+      </button>
+    </div>
+    <button class="btn-primary reveal reveal-delay-3" style="width:100%;justify-content:center;padding:1.1rem;font-size:13px;" type="button">
+      Reserve Your Edition →
+    </button>
+    <div class="reveal" style="margin-top:0.75rem;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#849491;">
+      30-Day Risk-Free &nbsp;·&nbsp; 100-Year Hull Warranty
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════ -->
+<footer style="position:relative;z-index:20;padding:3rem;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+  <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#d8e4f3;">sip<span style="color:#0ce4d1;">2O</span></span>
+  <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#3b4a47;">© 2026 sip2O Corp. All rights reserved.</span>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   SCROLL-DRIVEN PRODUCT IMAGE ANIMATION
+   ═══════════════════════════════════════════════════════════ */
+(function() {
+  var imgHero     = document.getElementById('img-hero');
+  var imgExploded = document.getElementById('img-exploded');
+
+  // Current (lerped) values
+  var curLeft = 75, curTop = 50, curRot = -18, curScale = 1.0;
+  var curHeroOp = 1, curExplOp = 0;
+
+  // Targets (set on scroll)
+  var tLeft = 75, tTop = 50, tRot = -18, tScale = 1.0;
+  var tHeroOp = 1, tExplOp = 0;
+
+  function onScroll() {
+    var scrollH = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollH <= 0) return;
+    var p = Math.min(Math.max(window.scrollY / scrollH, 0), 1);
+
+    if (p < 0.25) {
+      // ── HERO: bottle right, tilted like product shot ──
+      var t = p / 0.25;
+      tLeft   = 75 - t * 5;
+      tTop    = 50 + t * 2;
+      tRot    = -18 + t * 6;
+      tScale  = 1.0 + t * 0.06;
+      tHeroOp = 1;
+      tExplOp = 0;
+    } else if (p < 0.5) {
+      // ── PERFORMANCE: sweep to left, crossfade to exploded ──
+      var t = (p - 0.25) / 0.25;
+      tLeft   = 70 - t * 45;
+      tTop    = 52 - t * 4;
+      tRot    = -12 + t * 16;
+      tScale  = 1.06 + t * 0.1;
+      tHeroOp = 1 - Math.max(0, (t - 0.5) * 2);
+      tExplOp = Math.max(0, (t - 0.5) * 2);
+    } else if (p < 0.75) {
+      // ── PURITY: drift right, crossfade back to hero ──
+      var t = (p - 0.5) / 0.25;
+      tLeft   = 25 + t * 50;
+      tTop    = 48 + t * 2;
+      tRot    = 4 - t * 14;
+      tScale  = 1.16 - t * 0.04;
+      tExplOp = 1 - Math.max(0, (t - 0.4) * 1.67);
+      tHeroOp = Math.max(0, (t - 0.4) * 1.67);
+    } else {
+      // ── CONFIGURE: center heroic pose ──
+      var t = (p - 0.75) / 0.25;
+      tLeft   = 75 - t * 25;
+      tTop    = 50 - t * 6;
+      tRot    = -10 + t * 10;
+      tScale  = 1.12 + t * 0.05;
+      tHeroOp = 1;
+      tExplOp = 0;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Animation loop — lerp for buttery smooth motion
+  var breathing = 0;
+  var LERP = 0.06;
+
+  function lerp(a, b, f) { return a + (b - a) * f; }
+
+  function tick() {
+    requestAnimationFrame(tick);
+    breathing += 0.014;
+
+    curLeft   = lerp(curLeft,   tLeft,   LERP);
+    curTop    = lerp(curTop,    tTop,    LERP);
+    curRot    = lerp(curRot,    tRot,    LERP);
+    curScale  = lerp(curScale,  tScale,  LERP);
+    curHeroOp = lerp(curHeroOp, tHeroOp, LERP * 1.4);
+    curExplOp = lerp(curExplOp, tExplOp, LERP * 1.4);
+
+    // Breathing float (subtle vertical bob)
+    var floatY = Math.sin(breathing * 1.5) * 4;
+
+    // Position both images the same way
+    var tx = 'translate(-50%,-50%) rotate(' + curRot.toFixed(2) + 'deg) scale(' + curScale.toFixed(4) + ')';
+
+    imgHero.style.left      = curLeft.toFixed(2) + '%';
+    imgHero.style.top       = 'calc(' + curTop.toFixed(2) + '% + ' + floatY.toFixed(1) + 'px)';
+    imgHero.style.transform = tx;
+    imgHero.style.opacity   = Math.max(0, Math.min(1, curHeroOp)).toFixed(3);
+
+    imgExploded.style.left      = curLeft.toFixed(2) + '%';
+    imgExploded.style.top       = 'calc(' + curTop.toFixed(2) + '% + ' + floatY.toFixed(1) + 'px)';
+    imgExploded.style.transform = tx;
+    imgExploded.style.opacity   = Math.max(0, Math.min(1, curExplOp)).toFixed(3);
+  }
+
+  // Kick off
+  onScroll();
+  tick();
+})();
+
+/* ── Scroll progress bar ── */
+window.addEventListener('scroll', function() {
+  var p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+  document.getElementById('scroll-progress').style.width = (p * 100) + '%';
+}, { passive: true });
+
+/* ── Reveal on scroll ── */
+var reveals = document.querySelectorAll('.reveal');
+var revealObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+reveals.forEach(function(el) { revealObs.observe(el); });
+
+/* ── UV track animation ── */
+var uvObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) document.getElementById('uv-track').style.width = '72%';
+  });
+}, { threshold: 0.3 });
+var puritySection = document.getElementById('purity');
+if (puritySection) uvObs.observe(puritySection);
+
+/* ── Chapter dots ── */
+var sectionIds = ['hero','performance','purity','configure'];
+var dots = document.querySelectorAll('.cdot');
+dots.forEach(function(dot, i) {
+  dot.addEventListener('click', function() {
+    document.getElementById(sectionIds[i]).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+var sectionObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      var idx = sectionIds.indexOf(e.target.id);
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+    }
+  });
+}, { threshold: 0.35 });
+sectionIds.forEach(function(id) { var el = document.getElementById(id); if(el) sectionObs.observe(el); });
+
+/* ── Finish picker ── */
+function selectFinish(btn) {
+  document.querySelectorAll('.finish-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+/* ── Volume picker ── */
+function selectVol(v) {
+  var a = document.getElementById('vol-650');
+  var b = document.getElementById('vol-950');
+  if (v === 650) {
+    a.style.borderColor = '#0ce4d1'; a.style.background = 'rgba(12,228,209,0.08)';
+    b.style.borderColor = 'rgba(255,255,255,0.08)'; b.style.background = 'rgba(21,33,44,0.6)';
+  } else {
+    b.style.borderColor = '#0ce4d1'; b.style.background = 'rgba(12,228,209,0.08)';
+    a.style.borderColor = 'rgba(255,255,255,0.08)'; a.style.background = 'rgba(21,33,44,0.6)';
+  }
+}
+</script>
+</body>
+</html>
