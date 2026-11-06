@@ -54,34 +54,34 @@ tailwind.config = {
     pointer-events: none;
     z-index: 0;
     background:
-      radial-gradient(circle at 62% 45%, rgba(0, 240, 255, 0.045) 0%, rgba(18, 30, 45, 0.18) 25%, rgba(10, 14, 20, 0.75) 55%, #050505 85%),
+      radial-gradient(circle at 62% 45%, rgba(0, 240, 255, 0.05) 0%, rgba(18, 30, 45, 0.2) 28%, rgba(10, 14, 20, 0.8) 55%, #050505 85%),
       linear-gradient(180deg, #050505 0%, #080a0e 50%, #050505 100%);
   }
 
   /* Atmospheric Lens Flare & Highlight Mist */
   .lens-flare-disc {
     position: fixed;
-    top: 42%;
-    left: 63%;
+    top: 45%;
+    left: 62%;
     transform: translate(-50%, -50%);
-    width: 680px;
-    height: 680px;
+    width: 600px;
+    height: 600px;
     border-radius: 9999px;
-    background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(125, 249, 255, 0.03) 35%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.09) 0%, rgba(125, 249, 255, 0.03) 35%, transparent 70%);
     filter: blur(50px);
     pointer-events: none;
     z-index: 1;
   }
   .lens-flare-ring {
     position: fixed;
-    top: 42%;
-    left: 63%;
+    top: 45%;
+    left: 62%;
     transform: translate(-50%, -50%);
-    width: 520px;
-    height: 520px;
+    width: 480px;
+    height: 480px;
     border-radius: 9999px;
-    border: 1px solid rgba(0, 240, 255, 0.04);
-    box-shadow: 0 0 60px rgba(0, 240, 255, 0.02);
+    border: 1px solid rgba(0, 240, 255, 0.05);
+    box-shadow: 0 0 50px rgba(0, 240, 255, 0.025);
     pointer-events: none;
     z-index: 1;
   }
@@ -106,7 +106,7 @@ tailwind.config = {
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 15;
+    z-index: 12;
     pointer-events: none;
     overflow: hidden;
   }
@@ -114,7 +114,7 @@ tailwind.config = {
   /* ── Reveal Animations ──────────────────────── */
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(22px);
     transition: opacity 0.85s cubic-bezier(.22,1,.36,1), transform 0.85s cubic-bezier(.22,1,.36,1);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -127,19 +127,19 @@ tailwind.config = {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 50;
-    height: 74px;
+    height: 72px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 3.5rem;
-    background: rgba(5, 5, 5, 0.72);
+    background: rgba(5, 5, 5, 0.75);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
   .nav-logo {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 23px;
+    font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.03em;
     color: #e6edf3;
@@ -159,7 +159,6 @@ tailwind.config = {
     color: #8b949e;
     text-decoration: none;
     transition: all 0.25s;
-    position: relative;
   }
   .nav-links a:hover {
     color: #00f0ff;
@@ -172,13 +171,13 @@ tailwind.config = {
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
-    padding: 0.75rem 1.8rem;
+    padding: 0.72rem 1.75rem;
     border-radius: 9999px;
     background: #090e14;
     border: 1px solid rgba(0, 240, 255, 0.55);
     color: #00f0ff;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -206,7 +205,7 @@ tailwind.config = {
     color: #8b949e;
     text-decoration: none;
     transition: all 0.25s;
-    padding: 0.75rem 1rem;
+    padding: 0.72rem 1rem;
   }
   .btn-ghost:hover {
     color: #00f0ff;
@@ -243,20 +242,20 @@ tailwind.config = {
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 22px;
-    padding: 1.5rem;
+    border-radius: 20px;
+    padding: 1.4rem;
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
   }
   .spec-row {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0.85rem 0;
+    padding: 0.8rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
   .spec-row:last-child { border-bottom: none; }
 
   /* ── Finish Swatches ────────────────────────── */
   .finish-btn {
-    padding: 0.9rem 1rem; border-radius: 18px;
+    padding: 0.85rem 0.95rem; border-radius: 18px;
     border: 1px solid rgba(255, 255, 255, 0.07);
     background: rgba(18, 22, 30, 0.6); cursor: pointer;
     display: flex; flex-direction: column; align-items: center;
@@ -268,9 +267,9 @@ tailwind.config = {
   .finish-btn:hover, .finish-btn.active {
     border-color: #00f0ff;
     background: rgba(0, 240, 255, 0.08);
-    box-shadow: 0 0 22px rgba(0, 240, 255, 0.28);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
   }
-  .finish-swatch { width: 34px; height: 34px; border-radius: 9999px; }
+  .finish-swatch { width: 32px; height: 32px; border-radius: 9999px; }
 
   @media (max-width: 768px) {
     nav { padding: 0 1.25rem; }
@@ -307,8 +306,8 @@ tailwind.config = {
   </div>
 
   <!-- Bottom-Right Interactive Telemetry Overlay -->
-  <div class="self-end mb-4 flex flex-col items-end gap-2 pointer-events-auto">
-    <div class="glass-card p-3.5 flex flex-col gap-2 min-w-[210px] border-electric-blue/20">
+  <div class="self-end mb-2 flex flex-col items-end gap-2 pointer-events-auto">
+    <div class="glass-card p-3 flex flex-col gap-1.5 min-w-[200px] border-electric-blue/20">
       <div class="flex justify-between items-center text-[9px] text-electric-blue font-bold tracking-wider">
         <span>TELEMETRY HUD</span>
         <span class="flex items-center gap-1.5">
@@ -334,8 +333,7 @@ tailwind.config = {
           <div class="text-electric-blue font-heading font-bold text-xs">0.0001 Torr</div>
         </div>
       </div>
-      <!-- Interactive 3D Orbit prompt -->
-      <div class="mt-1 pt-1.5 border-t border-white/5 flex items-center justify-between text-[8px] text-titanium-slate">
+      <div class="mt-1 pt-1 border-t border-white/5 flex items-center justify-between text-[8px] text-titanium-slate">
         <span>SCROLL TO DECONSTRUCT</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-electric-blue animate-bounce">
           <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -345,7 +343,7 @@ tailwind.config = {
   </div>
 </div>
 
-<!-- ═══ 3D WEBGL STAGE (ANTI-GRAVITY LEVITATING BOTTLE) ══ -->
+<!-- ═══ 3D WEBGL STAGE (ANTI-GRAVITY PROPORTIONED BOTTLE) ═ -->
 <div id="three-stage">
   <div id="threejs-canvas-wrap" style="width:100%;height:100%;"></div>
 </div>
@@ -370,26 +368,26 @@ tailwind.config = {
 
 <!-- ═══ SECTION 1: HERO (GENESIS // ANTI-GRAVITY VOID) ═══ -->
 <section id="hero" class="section">
-  <div style="max-width:580px;" class="relative z-30">
+  <div style="max-width:560px;" class="relative z-30">
     <!-- Top Glowing Label -->
     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-void-charcoal/90 border border-electric-blue/40 text-electric-blue font-mono text-[11px] font-semibold tracking-wider uppercase mb-6 shadow-[0_0_20px_rgba(0,240,255,0.25)] reveal">
       <span>🚀</span> TI-6AL-4V AEROSPACE TITANIUM
     </div>
 
     <!-- Main Bold Heading -->
-    <h1 class="reveal reveal-delay-1 font-heading text-[52px] sm:text-[68px] lg:text-[76px] font-bold leading-[1.04] tracking-[-0.03em] text-titanium-light mb-6">
+    <h1 class="reveal reveal-delay-1 font-heading text-[48px] sm:text-[64px] lg:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] text-titanium-light mb-6">
       Pure Water.<br>
       Engineered<br>
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-electric-blue via-electric-glow to-white drop-shadow-[0_0_35px_rgba(0,240,255,0.7)]">Perfectly.</span>
     </h1>
 
     <!-- Body Text -->
-    <p class="reveal reveal-delay-2 font-body text-[16px] sm:text-[17px] text-titanium-slate leading-[1.68] max-w-[460px] mb-8 font-normal">
+    <p class="reveal reveal-delay-2 font-body text-[15px] sm:text-[16px] text-titanium-slate leading-[1.68] max-w-[450px] mb-8 font-normal">
       Autonomous fluid architecture forged from aerospace-grade titanium. 36-hour cryogenic vacuum insulation with integrated 280nm optical UV-C self-purification.
     </p>
 
     <!-- Two Buttons -->
-    <div class="reveal reveal-delay-3 flex items-center gap-4 flex-wrap mb-14">
+    <div class="reveal reveal-delay-3 flex items-center gap-4 flex-wrap mb-12">
       <a class="btn-preorder" href="#configure">
         <span>Pre-Order Edition — $349</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -423,7 +421,7 @@ tailwind.config = {
 
 <!-- ═══ SECTION 2: CRYO-CORE // DECONSTRUCTED ANATOMY ════ -->
 <section id="performance" class="section" style="justify-content:flex-end;">
-  <div style="max-width:490px;width:100%;" class="relative z-30">
+  <div style="max-width:480px;width:100%;" class="relative z-30">
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-void-charcoal border border-copper/40 text-copper font-mono text-[10px] font-semibold tracking-wider uppercase mb-4 reveal">
       <span class="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_#d97438]"></span>
       CHAPTER 02 // THERMAL METROLOGY
@@ -488,7 +486,7 @@ tailwind.config = {
 
 <!-- ═══ SECTION 3: PURITY // HYDRATION OS & UV-C ═════════ -->
 <section id="purity" class="section" style="justify-content:flex-start;">
-  <div style="max-width:490px;width:100%;" class="relative z-30">
+  <div style="max-width:480px;width:100%;" class="relative z-30">
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-void-charcoal border border-electric-blue/40 text-electric-blue font-mono text-[10px] font-semibold tracking-wider uppercase mb-4 reveal">
       <span class="w-1.5 h-1.5 rounded-full bg-electric-blue shadow-[0_0_8px_#00f0ff]"></span>
       CHAPTER 03 // INTELLIGENT METROLOGY
@@ -610,10 +608,9 @@ tailwind.config = {
 
 <!-- ═══════════════════════════════════════════════════════
      THREE.JS ANTI-GRAVITY SIMULATION ENGINE
-     - Dark Metallic Aerospace Titanium finish
-     - 280nm UV-C Glowing light emission ring
-     - Floating zero-g weightless droplets catching light
-     - Multi-layer deconstructed exploded core on scroll
+     - Balanced, contained viewport scale (Never cropped)
+     - Dynamic responsive FOV and camera distance
+     - Deconstructed exploded core cleanly confined
      ═══════════════════════════════════════════════════════ -->
 <script>
 (function() {
@@ -624,10 +621,10 @@ tailwind.config = {
   const width = container.clientWidth || window.innerWidth;
   const height = container.clientHeight || window.innerHeight;
   
-  // Cinematic slightly low-angle perspective
-  const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 1000);
-  camera.position.set(0, -0.2, 8.8);
-  camera.lookAt(0, 0.2, 0);
+  // Clean focal length & camera distance: perfectly frames entire bottle
+  const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 1000);
+  camera.position.set(0, 0, 10.5);
+  camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(width, height);
@@ -636,24 +633,21 @@ tailwind.config = {
   renderer.toneMappingExposure = 1.25;
   container.appendChild(renderer.domElement);
 
-  // ── Moody Cinematic Volumetric Lighting ────────────────
-  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
+  // ── Moody Volumetric & Specular Lights ─────────────────
+  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
 
-  // Volumetric spotlight directly illuminating the suspended bottle
-  const spotLight = new THREE.SpotLight(0x7df9ff, 4.5);
-  spotLight.position.set(4, 9, 6);
+  const spotLight = new THREE.SpotLight(0x7df9ff, 4.2);
+  spotLight.position.set(4, 8, 6);
   spotLight.angle = Math.PI / 4.5;
   spotLight.penumbra = 0.85;
   scene.add(spotLight);
 
-  // Rim back-light for sharp aerospace titanium silhouette
   const rimLight = new THREE.DirectionalLight(0x00f0ff, 3.2);
   rimLight.position.set(-6, 3, -5);
   scene.add(rimLight);
 
-  // Warm molten copper fill light
   const copperFill = new THREE.PointLight(0xd97438, 2.0, 15);
-  copperFill.position.set(-4, -3, 3);
+  copperFill.position.set(-3, -2, 3);
   scene.add(copperFill);
 
   // ── Canvas Texture: Dark High-End Metallic Titanium ───
@@ -693,7 +687,7 @@ tailwind.config = {
     drawContour(850, 32, 0.013, 170);
     drawContour(900, 22, 0.009, 250);
 
-    // Coordinate grid overlay on vessel surface
+    // Surface wireframe coordinates
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
     ctx.lineWidth = 1.2;
     for (let x = 80; x < 940; x += 100) {
@@ -705,7 +699,7 @@ tailwind.config = {
       ctx.stroke();
     }
 
-    // Bold, modern, futuristic vertical typography
+    // Bold vertical branding
     ctx.save();
     ctx.translate(512, 430);
     ctx.rotate(-Math.PI / 2);
@@ -754,7 +748,6 @@ tailwind.config = {
     roughness: 0.22
   });
 
-  // 280nm UV-C Glowing light band material
   const uvcGlowMat = new THREE.MeshBasicMaterial({
     color: 0x00f0ff
   });
@@ -765,34 +758,42 @@ tailwind.config = {
     roughness: 0.8
   });
 
-  // ── Build Suspended Anti-Gravity Bottle ────────────────
+  // ── Build Suspended Anti-Gravity Bottle (Scaled to fit viewport) ──
   const bottleGroup = new THREE.Group();
 
   // Tier 1: Outer Fuselage Shell
   const chassisGroup = new THREE.Group();
-  const bodyGeo = new THREE.CylinderGeometry(0.96, 0.93, 3.8, 56);
+  
+  // Chamfered base puck
+  const basePuckGeo = new THREE.CylinderGeometry(0.92, 0.86, 0.25, 56);
+  const basePuckMesh = new THREE.Mesh(basePuckGeo, titaniumChassisMat);
+  basePuckMesh.position.y = -2.1;
+  chassisGroup.add(basePuckMesh);
+
+  // Main Cylinder
+  const bodyGeo = new THREE.CylinderGeometry(0.95, 0.92, 3.6, 56);
   const bodyMesh = new THREE.Mesh(bodyGeo, titaniumChassisMat);
-  bodyMesh.position.y = -0.3;
+  bodyMesh.position.y = -0.2;
   chassisGroup.add(bodyMesh);
 
-  // Curved ergonomic shoulder
-  const shoulderGeo = new THREE.CylinderGeometry(0.72, 0.96, 0.85, 56);
+  // Ergonomic Shoulder
+  const shoulderGeo = new THREE.CylinderGeometry(0.72, 0.95, 0.85, 56);
   const shoulderMesh = new THREE.Mesh(shoulderGeo, titaniumChassisMat);
   shoulderMesh.position.y = 1.95;
   chassisGroup.add(shoulderMesh);
   bottleGroup.add(chassisGroup);
 
-  // Tier 2: Radiant Copper Thermal Core
+  // Tier 2: Radiant Copper Thermal Core (Nests cleanly inside when assembled)
   const copperGroup = new THREE.Group();
-  const copperGeo = new THREE.CylinderGeometry(0.83, 0.83, 3.6, 48);
+  const copperGeo = new THREE.CylinderGeometry(0.82, 0.82, 3.4, 48);
   const copperMesh = new THREE.Mesh(copperGeo, moltenCopperMat);
   copperMesh.position.y = -0.2;
   copperGroup.add(copperMesh);
   bottleGroup.add(copperGroup);
 
-  // Tier 3: 316L Stainless Steel Vacuum Wall
+  // Tier 3: 316L Stainless Steel Vacuum Wall (Nests inside copper core)
   const steelGroup = new THREE.Group();
-  const steelGeo = new THREE.CylinderGeometry(0.72, 0.72, 3.7, 48);
+  const steelGeo = new THREE.CylinderGeometry(0.70, 0.70, 3.5, 48);
   const steelMesh = new THREE.Mesh(steelGeo, vacuumStainlessMat);
   steelMesh.position.y = -0.15;
   steelGroup.add(steelMesh);
@@ -814,14 +815,14 @@ tailwind.config = {
   gasketMesh.position.y = 2.68;
   capStackGroup.add(gasketMesh);
 
-  // 280nm UV-C Glowing Light Band (near the top)
+  // 280nm UV-C Glowing Light Band
   const uvcBandGeo = new THREE.TorusGeometry(0.62, 0.042, 16, 64);
   uvcBandGeo.rotateX(Math.PI / 2);
   const uvcBandMesh = new THREE.Mesh(uvcBandGeo, uvcGlowMat);
   uvcBandMesh.position.y = 2.76;
   capStackGroup.add(uvcBandMesh);
 
-  // Dynamic UV-C point light emitting real electric-blue radiance
+  // Dynamic UV-C point light
   const uvcLight = new THREE.PointLight(0x00f0ff, 3.5, 4.5);
   uvcLight.position.set(0, 2.76, 0);
   capStackGroup.add(uvcLight);
@@ -844,8 +845,8 @@ tailwind.config = {
   bottleGroup.add(capStackGroup);
 
   // ── Floating Weightless Water Droplets in Zero-G ───────
-  const dropletCount = 80;
-  const dropletGeo = new THREE.SphereGeometry(0.044, 16, 16);
+  const dropletCount = 65;
+  const dropletGeo = new THREE.SphereGeometry(0.042, 16, 16);
   const dropletMat = new THREE.MeshPhysicalMaterial({
     color: 0x7df9ff,
     emissive: 0x00f0ff,
@@ -861,8 +862,8 @@ tailwind.config = {
   for (let i = 0; i < dropletCount; i++) {
     const d = new THREE.Mesh(dropletGeo, dropletMat);
     const angle = Math.random() * Math.PI * 2;
-    const radius = 1.35 + Math.random() * 1.8;
-    const y = (Math.random() - 0.5) * 5.8;
+    const radius = 1.3 + Math.random() * 1.5;
+    const y = (Math.random() - 0.5) * 5.2;
     d.position.set(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
     d.userData = {
       angle,
@@ -876,62 +877,68 @@ tailwind.config = {
     droplets.push(d);
   }
 
+  // ═══ MASTER PROPORTION FIT ═════════════════════════════
+  // Baseline scale of 0.62 guarantees the entire bottle from base
+  // to cap fits comfortably in the viewport without clipping!
+  const BASELINE_SCALE = 0.62;
+  bottleGroup.scale.set(BASELINE_SCALE, BASELINE_SCALE, BASELINE_SCALE);
+
   scene.add(bottleGroup);
 
-  // Initial Anti-Gravity Suspended Pose
-  bottleGroup.position.x = 1.35;
-  bottleGroup.position.y = 0.15;
+  // Initial Zero-G Hero Pose
+  bottleGroup.position.x = 1.55;
+  bottleGroup.position.y = 0.0;
   bottleGroup.rotation.y = -0.32;
-  bottleGroup.rotation.z = 0.12;
+  bottleGroup.rotation.z = 0.10;
 
-  let targetX = 1.35;
-  let targetY = 0.15;
+  let targetX = 1.55;
+  let targetY = 0.0;
   let targetRotY = -0.32;
-  let targetRotZ = 0.12;
-  let targetScale = 1.08;
+  let targetRotZ = 0.10;
+  let targetScale = BASELINE_SCALE;
   let targetExplode = 0.0;
   let currentExplode = 0.0;
 
-  // ── Scroll Scrollytelling Choreography ──────────────────
+  // ── Scroll Scrollytelling Choreography (Controlled & Contained) ──
   function updateScrollChoreography() {
     const maxScroll = (document.documentElement.scrollHeight - window.innerHeight) || 1;
     const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
 
-    if (progress < 0.25) {
-      // ── HERO: Suspended in center-right viewport, proud zero-g tilt ──
-      const t = progress / 0.25;
-      targetX = 1.35 - t * 0.2;
-      targetY = 0.15 - t * 0.05;
-      targetRotY = -0.32 + t * 0.65;
-      targetRotZ = 0.12 - t * 0.06;
-      targetScale = 1.08 + t * 0.04;
+    if (progress < 0.24) {
+      // ── HERO: Entire bottle proudly framed on the right ──
+      const t = progress / 0.24;
+      targetX = 1.55 - t * 0.2;
+      targetY = 0.0;
+      targetRotY = -0.32 + t * 0.55;
+      targetRotZ = 0.10 - t * 0.04;
+      targetScale = BASELINE_SCALE;
       targetExplode = 0.0;
-    } else if (progress < 0.52) {
-      // ── CRYO-CORE: Slides left and deconstructs into multi-layer core! ──
-      const t = (progress - 0.25) / 0.27;
-      targetX = 1.15 - t * 2.35; // glides to left
-      targetY = 0.1 + t * 0.15;
-      targetRotY = 0.33 + t * 2.25;
-      targetRotZ = 0.06 - Math.sin(t * Math.PI) * 0.22;
-      targetScale = 1.12 + t * 0.08;
-      targetExplode = Math.min(1.0, t * 1.3);
-    } else if (progress < 0.78) {
-      // ── HYDRATION OS & UV-C: Reassembles, tilts up toward 280nm glowing cap ──
-      const t = (progress - 0.52) / 0.26;
-      targetX = -1.2 + t * 2.4;
-      targetY = 0.25 - t * 1.5;
-      targetRotY = 2.58 + t * 1.8;
-      targetRotZ = -0.16 + t * 0.32;
-      targetScale = 1.25;
-      targetExplode = Math.max(0.0, 1.0 - t * 1.8);
+    } else if (progress < 0.50) {
+      // ── CRYO-CORE: Glides left and deconstructs cleanly inside left quadrant ──
+      const t = (progress - 0.24) / 0.26;
+      targetX = 1.35 - t * 2.7; // moves to left (x = -1.35)
+      targetY = 0.05;
+      targetRotY = 0.23 + t * 2.1;
+      targetRotZ = 0.06 - Math.sin(t * Math.PI) * 0.18;
+      targetScale = BASELINE_SCALE * 0.95; // compact scale so fanned layers fit on screen
+      targetExplode = Math.min(1.0, t * 1.4);
+    } else if (progress < 0.76) {
+      // ── HYDRATION OS & UV-C: Completely reassembled, glides to right ──
+      const t = (progress - 0.50) / 0.26;
+      targetX = -1.35 + t * 2.9; // returns to right side (x = 1.55)
+      targetY = -0.15; // slightly lower to keep glowing cap center-stage
+      targetRotY = 2.33 + t * 1.6;
+      targetRotZ = -0.12 + t * 0.22;
+      targetScale = BASELINE_SCALE * 1.05; // clean, controlled zoom that fits
+      targetExplode = Math.max(0.0, 1.0 - t * 3.0); // snaps shut instantly
     } else {
-      // ── BESPOKE CONFIGURATOR: Centers up in heroic 3/4 turn ──
-      const t = (progress - 0.78) / 0.22;
-      targetX = 1.2 - t * 1.2; // center x = 0
-      targetY = -1.25 + t * 1.15;
-      targetRotY = 4.38 + t * 1.4;
-      targetRotZ = 0.16 - t * 0.2;
-      targetScale = 1.16;
+      // ── BESPOKE CONFIGURATOR: Centers above configurator controls ──
+      const t = (progress - 0.76) / 0.24;
+      targetX = 1.55 - t * 1.55; // center x = 0
+      targetY = -0.15 + t * 0.55; // positions comfortably above swatches
+      targetRotY = 3.93 + t * 1.5;
+      targetRotZ = 0.10 - t * 0.12;
+      targetScale = BASELINE_SCALE * 0.95;
       targetExplode = 0.0;
     }
   }
@@ -955,28 +962,29 @@ tailwind.config = {
     const currentScale = bottleGroup.scale.x + (targetScale - bottleGroup.scale.x) * LERP_FACTOR;
     bottleGroup.scale.set(currentScale, currentScale, currentScale);
 
-    // Exploded view separation lerp
+    // Exploded view separation lerp (Controlled offsets)
     currentExplode += (targetExplode - currentExplode) * LERP_FACTOR;
 
-    chassisGroup.position.x = -currentExplode * 0.88;
-    chassisGroup.position.z = currentExplode * 0.42;
+    // Symmetrical, contained separation
+    chassisGroup.position.x = -currentExplode * 0.75;
+    chassisGroup.position.z = currentExplode * 0.35;
 
-    copperGroup.position.x = currentExplode * 0.38;
-    copperGroup.position.z = currentExplode * 0.68;
+    copperGroup.position.x = currentExplode * 0.30;
+    copperGroup.position.z = currentExplode * 0.55;
 
-    steelGroup.position.x = currentExplode * 1.08;
-    steelGroup.position.z = currentExplode * 0.22;
+    steelGroup.position.x = currentExplode * 0.85;
+    steelGroup.position.z = currentExplode * 0.18;
 
-    collarMesh.position.y = 2.45 + currentExplode * 0.58;
-    gasketMesh.position.y = 2.68 + currentExplode * 0.98;
-    uvcBandMesh.position.y = 2.76 + currentExplode * 1.38;
-    uvcLight.position.y    = 2.76 + currentExplode * 1.38;
-    spoutMesh.position.y  = 3.12 + currentExplode * 1.88;
+    collarMesh.position.y = 2.45 + currentExplode * 0.45;
+    gasketMesh.position.y = 2.68 + currentExplode * 0.75;
+    uvcBandMesh.position.y = 2.76 + currentExplode * 1.05;
+    uvcLight.position.y    = 2.76 + currentExplode * 1.05;
+    spoutMesh.position.y  = 3.12 + currentExplode * 1.45;
 
     // Weightless Anti-Gravity Suspension Oscillation
-    const antiGravHover = Math.sin(clock * 1.4) * 0.005 + Math.cos(clock * 0.8) * 0.002;
+    const antiGravHover = Math.sin(clock * 1.4) * 0.003;
     bottleGroup.position.y += antiGravHover;
-    bottleGroup.rotation.x = Math.sin(clock * 0.9) * 0.015;
+    bottleGroup.rotation.x = Math.sin(clock * 0.8) * 0.012;
 
     // Orbit & Bob weightless water droplets
     droplets.forEach(d => {
@@ -995,14 +1003,31 @@ tailwind.config = {
   }
   animate();
 
-  // Responsive resize
-  window.addEventListener('resize', () => {
-    const newW = container.clientWidth || window.innerWidth;
-    const newH = container.clientHeight || window.innerHeight;
-    camera.aspect = newW / newH;
+  // Responsive Dynamic Camera Adjustment (Guarantees bottle never clips)
+  function adjustCamera() {
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    const aspect = w / h;
+    camera.aspect = aspect;
+
+    if (aspect < 1.0) {
+      // Mobile vertical view: pull camera back so bottle stays completely visible
+      camera.position.z = 13.5;
+      camera.fov = 40;
+    } else if (h < 700) {
+      // Shallow laptop screen
+      camera.position.z = 11.8;
+      camera.fov = 36;
+    } else {
+      // Standard desktop
+      camera.position.z = 10.5;
+      camera.fov = 36;
+    }
     camera.updateProjectionMatrix();
-    renderer.setSize(newW, newH);
-  });
+    renderer.setSize(w, h);
+  }
+  adjustCamera();
+  window.addEventListener('resize', adjustCamera);
 
   // Global material updater for interactive finish customizer
   window.__setVesselColor = function(colorHex, labelText) {
