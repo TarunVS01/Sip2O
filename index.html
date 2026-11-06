@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>sip2O — Pure Hydration</title>
+<title>sip2O — Autonomous Fluid Architecture</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -30,6 +30,11 @@ tailwind.config = {
         'tertiary-container': '#5fdee4',
         outline: '#849491',
         'outline-variant': '#3b4a47',
+        copper: '#d97438',
+      },
+      fontFamily: {
+        heading: ['Space Grotesk', 'sans-serif'],
+        body: ['Plus Jakarta Sans', 'sans-serif'],
       },
     }
   }
@@ -52,50 +57,35 @@ tailwind.config = {
   /* ── Reveal on scroll ──────────────────────── */
   .reveal {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(28px);
     transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.12s; }
   .reveal-delay-2 { transition-delay: 0.24s; }
-  .reveal-delay-3 { transition-delay: 0.38s; }
+  .reveal-delay-3 { transition-delay: 0.36s; }
 
-  /* ═══ BOTTLE IMAGE LAYER ═══════════════════════ */
-  #bottle-stage {
+  /* ═══ 3D CANVAS STAGE ═════════════════════════ */
+  #three-stage {
     position: fixed;
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 25;           /* ABOVE sections (20), below nav (50) */
+    z-index: 10;
     pointer-events: none;
     overflow: hidden;
   }
-  #bottle-stage img {
-    position: absolute;
-    height: 72vh;
-    max-height: 700px;
-    width: auto;
-    object-fit: contain;
-    will-change: transform, opacity;
-    filter: drop-shadow(0 25px 50px rgba(0,0,0,0.5))
-            drop-shadow(0 0 30px rgba(12,228,209,0.1));
-  }
-  /* Fade out the dark JPG background edges with a radial mask */
-  #img-hero {
-    -webkit-mask-image: radial-gradient(ellipse 70% 75% at 50% 48%, black 45%, transparent 78%);
-    mask-image: radial-gradient(ellipse 70% 75% at 50% 48%, black 45%, transparent 78%);
-  }
 
-  /* ── Ambient glows ─────────────────────────── */
+  /* ── Ambient Glows ─────────────────────────── */
   .glow-blob {
     position: fixed;
     border-radius: 9999px;
-    filter: blur(130px);
+    filter: blur(140px);
     pointer-events: none;
     z-index: 0;
   }
 
-  /* ── Nav ───────────────────────────────────── */
+  /* ── Navigation ────────────────────────────── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -105,10 +95,10 @@ tailwind.config = {
     align-items: center;
     justify-content: space-between;
     padding: 0 3rem;
-    background: rgba(8,20,31,0.75);
+    background: rgba(8,20,31,0.78);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .nav-logo {
     font-family: 'Space Grotesk', sans-serif;
@@ -117,6 +107,9 @@ tailwind.config = {
     letter-spacing: -0.03em;
     color: #d8e4f3;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
   .nav-logo span { color: #0ce4d1; }
   .nav-links { display: flex; gap: 2rem; align-items: center; }
@@ -135,7 +128,7 @@ tailwind.config = {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.6rem 1.5rem;
+    padding: 0.65rem 1.6rem;
     border-radius: 9999px;
     background: #0ce4d1;
     color: #003732;
@@ -151,7 +144,7 @@ tailwind.config = {
   }
   .btn-primary:hover {
     transform: scale(1.03);
-    box-shadow: 0 0 24px rgba(12,228,209,0.5);
+    box-shadow: 0 0 28px rgba(12,228,209,0.5);
   }
 
   /* ── Scroll progress ──────────────────────── */
@@ -165,7 +158,7 @@ tailwind.config = {
     box-shadow: 0 0 10px #0ce4d1;
   }
 
-  /* ── Section ───────────────────────────────── */
+  /* ── Sections ──────────────────────────────── */
   .section {
     position: relative;
     z-index: 20;
@@ -177,12 +170,12 @@ tailwind.config = {
     margin: 0 auto;
   }
 
-  /* ── Cards ─────────────────────────────────── */
+  /* ── Components & Cards ────────────────────── */
   .stat-card {
     background: rgba(21,33,44,0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.07);
     border-radius: 20px;
     padding: 1.25rem 1.5rem;
   }
@@ -212,22 +205,24 @@ tailwind.config = {
     width: 6px; height: 6px; border-radius: 9999px;
     background: #0ce4d1; box-shadow: 0 0 8px #0ce4d1;
   }
+  .glass-card {
+    background: rgba(17,29,39,0.88);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    padding: 1.6rem;
+  }
   .spec-row {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0.9rem 0;
+    padding: 0.85rem 0;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
   .spec-row:last-child { border-bottom: none; }
-  .glass-card {
-    background: rgba(17,29,39,0.88);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 20px;
-    padding: 1.5rem;
-  }
+
+  /* ── Interactive Finish Swatches ──────────── */
   .finish-btn {
-    padding: 0.9rem 1rem; border-radius: 16px;
+    padding: 0.9rem 1rem; border-radius: 18px;
     border: 1px solid rgba(255,255,255,0.08);
     background: rgba(21,33,44,0.6); cursor: pointer;
     display: flex; flex-direction: column; align-items: center;
@@ -238,16 +233,21 @@ tailwind.config = {
   }
   .finish-btn:hover, .finish-btn.active {
     border-color: #0ce4d1;
-    background: rgba(12,228,209,0.1);
-    box-shadow: 0 0 16px rgba(12,228,209,0.2);
+    background: rgba(12,228,209,0.12);
+    box-shadow: 0 0 20px rgba(12,228,209,0.25);
   }
   .finish-swatch { width: 36px; height: 36px; border-radius: 9999px; }
 
-  /* ── Chapter dots ──────────────────────────── */
+  /* ── Floating Chapter HUD ─────────────────── */
   #chapter-dots {
     position: fixed; right: 2rem; top: 50%;
     transform: translateY(-50%); z-index: 40;
-    display: flex; flex-direction: column; gap: 0.5rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    background: rgba(21,33,44,0.6);
+    backdrop-filter: blur(16px);
+    padding: 0.8rem 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.06);
   }
   .cdot {
     width: 6px; height: 6px; border-radius: 9999px;
@@ -255,8 +255,8 @@ tailwind.config = {
     transition: all 0.3s; cursor: pointer;
   }
   .cdot.active {
-    background: #0ce4d1; height: 20px;
-    box-shadow: 0 0 8px #0ce4d1;
+    background: #0ce4d1; height: 22px;
+    box-shadow: 0 0 10px #0ce4d1;
   }
 
   @media (max-width: 768px) {
@@ -264,355 +264,741 @@ tailwind.config = {
     .nav-links { display: none; }
     .section { padding: 5rem 1.25rem; }
     #chapter-dots { display: none; }
-    #bottle-stage img { height: 45vh; max-height: 400px; }
   }
 </style>
+<!-- Load Three.js safely from trusted global CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-<body class="dark">
+<body class="dark selection:bg-primary-container selection:text-on-primary-container">
 
-<!-- Scroll progress -->
+<!-- Scroll Progress Bar -->
 <div id="scroll-progress"></div>
 
-<!-- Chapter dots -->
+<!-- Side Chapter HUD -->
 <div id="chapter-dots">
-  <div class="cdot active" data-target="hero"></div>
-  <div class="cdot" data-target="performance"></div>
-  <div class="cdot" data-target="purity"></div>
-  <div class="cdot" data-target="configure"></div>
+  <div class="cdot active" data-target="hero" title="Genesis"></div>
+  <div class="cdot" data-target="performance" title="Cryo-Shield"></div>
+  <div class="cdot" data-target="purity" title="Hydration OS"></div>
+  <div class="cdot" data-target="configure" title="Configurator"></div>
 </div>
 
-<!-- Ambient glows -->
-<div class="glow-blob" style="width:600px;height:600px;top:5%;left:-15%;background:rgba(12,228,209,0.07);"></div>
-<div class="glow-blob" style="width:700px;height:700px;bottom:10%;right:-20%;background:rgba(138,250,255,0.04);"></div>
+<!-- Ambient Radial Glows -->
+<div class="glow-blob" style="width:650px;height:650px;top:5%;left:-12%;background:rgba(12,228,209,0.08);"></div>
+<div class="glow-blob" style="width:750px;height:750px;top:45%;right:-18%;background:rgba(217,116,56,0.06);"></div>
+<div class="glow-blob" style="width:700px;height:700px;bottom:5%;left:20%;background:rgba(138,250,255,0.05);"></div>
 
-<!-- ═══ BOTTLE IMAGE STAGE (scroll-animated) ═════════════ -->
-<div id="bottle-stage">
-  <img id="img-hero" src="bottle-hero.jpg" alt="sip2O Bottle" />
-  <img id="img-exploded" src="bottle-exploded.png" alt="sip2O Exploded View" style="opacity:0;" />
+<!-- ═══ THREE.JS 3D BOTTLE STAGE ═════════════════════════ -->
+<div id="three-stage">
+  <div id="threejs-canvas-wrap" style="width:100%;height:100%;"></div>
 </div>
 
-<!-- ═══ NAV ══════════════════════════════════════════════ -->
+<!-- ═══ HEADER NAVIGATION ════════════════════════════════ -->
 <nav>
-  <a class="nav-logo" href="#">sip<span>2O</span></a>
+  <a class="nav-logo" href="#">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-primary">
+      <path d="M12 2L4 6V18L12 22L20 18V6L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="3" fill="#0ce4d1"/>
+    </svg>
+    sip<span>2O</span>
+  </a>
   <div class="nav-links">
-    <a href="#performance">Performance</a>
-    <a href="#purity">Purity</a>
-    <a href="#configure">Configure</a>
+    <a href="#hero">Genesis</a>
+    <a href="#performance">Cryo-Core</a>
+    <a href="#purity">Hydration OS</a>
+    <a href="#configure">Configurator</a>
   </div>
-  <a class="btn-primary" href="#configure">Pre-Order</a>
+  <a class="btn-primary" href="#configure">Pre-Order Now</a>
 </nav>
 
-<!-- ═══ SECTION 1: HERO ═══════════════════════════════════ -->
-<section id="hero" class="section" style="min-height:100vh;">
-  <div style="max-width:540px;">
+<!-- ═══ SECTION 1: HERO (GENESIS) ═════════════════════════ -->
+<section id="hero" class="section">
+  <div style="max-width:560px;">
     <div class="feature-pill reveal" style="margin-bottom:1.5rem;">
       <span class="dot"></span> Ti-6Al-4V Aerospace Titanium
     </div>
-    <h1 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(42px,6vw,72px);font-weight:700;line-height:1.05;letter-spacing:-0.03em;margin:0 0 1.5rem;">
+    <h1 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(44px,6vw,74px);font-weight:700;line-height:1.05;letter-spacing:-0.03em;margin:0 0 1.5rem;">
       Pure Water.<br>Engineered<br><span style="color:#0ce4d1;">Perfectly.</span>
     </h1>
-    <p class="reveal reveal-delay-2" style="font-size:16px;line-height:1.65;color:#b9cac6;max-width:400px;margin:0 0 2.5rem;">
-      Titanium construction. UV-C self-purification. 36-hour thermal lock. Zero compromise.
+    <p class="reveal reveal-delay-2" style="font-size:16px;line-height:1.65;color:#b9cac6;max-width:440px;margin:0 0 2.5rem;">
+      Autonomous fluid architecture forged from aerospace-grade titanium. 36-hour cryogenic vacuum insulation with integrated 280nm optical UV-C self-purification.
     </p>
-    <div class="reveal reveal-delay-3" style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
-      <a class="btn-primary" href="#configure">Pre-Order — $349</a>
-      <a href="#performance" style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#849491;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#68ffed'" onmouseout="this.style.color='#849491'">Explore ↓</a>
+    <div class="reveal reveal-delay-3" style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;">
+      <a class="btn-primary" href="#configure">Pre-Order Edition — $349</a>
+      <a href="#performance" style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#849491;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#68ffed'" onmouseout="this.style.color='#849491'">
+        Deconstruct Anatomy ↓
+      </a>
     </div>
+
+    <!-- Telemetry Stats Strip -->
     <div class="reveal reveal-delay-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;margin-top:3.5rem;">
       <div class="stat-card">
         <div class="stat-num">36h</div>
-        <div class="stat-label">Ice Retention</div>
+        <div class="stat-label">Sub-Zero Retention</div>
       </div>
       <div class="stat-card">
         <div class="stat-num" style="color:#8afaff;">99.9%</div>
         <div class="stat-label">Pathogen Kill</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num" style="color:#d8e4f3;">0g</div>
-        <div class="stat-label">Microplastic</div>
+        <div class="stat-num" style="color:#d8e4f3;">0.00g</div>
+        <div class="stat-label">Microplastic Leaching</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SECTION 2: PERFORMANCE ════════════════════════════ -->
+<!-- ═══ SECTION 2: PERFORMANCE (EXPLODED CORE) ═══════════ -->
 <section id="performance" class="section" style="justify-content:flex-end;">
-  <div style="max-width:460px;width:100%;">
-    <div class="feature-pill reveal" style="margin-bottom:1.25rem;color:#8afaff;border-color:rgba(138,250,255,0.25);background:rgba(138,250,255,0.06);">
-      <span class="dot" style="background:#8afaff;box-shadow:0 0 8px #8afaff;"></span> Cryo-Shield Vacuum Core
+  <div style="max-width:480px;width:100%;">
+    <div class="feature-pill reveal" style="margin-bottom:1.25rem;color:#d97438;border-color:rgba(217,116,56,0.3);background:rgba(217,116,56,0.08);">
+      <span class="dot" style="background:#d97438;box-shadow:0 0 8px #d97438;"></span> Chapter 02 // Deconstructed Core
     </div>
-    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.025em;margin:0 0 1.25rem;">
-      Temperature<br>held hostage.
+    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,50px);font-weight:700;letter-spacing:-0.025em;margin:0 0 1.25rem;line-height:1.1;">
+      Cryo-Shield™<br><span style="color:#d97438;">Multi-Layer Anatomy</span>
     </h2>
+
+    <!-- Exploded Anatomy Spec Card -->
     <div class="glass-card reveal reveal-delay-2" style="margin-bottom:1.5rem;">
       <div class="spec-row">
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#b9cac6;">Dual-wall vacuum</span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">0.0001 Torr</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#7a8878]"></span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#d8e4f3;">Sage Ceramic Outer Shell</span>
+        </div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">Laser Contoured</span>
       </div>
       <div class="spec-row">
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#b9cac6;">Cold retention</span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">36+ hours</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#d97438]"></span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#d8e4f3;">Radiant Copper Thermal Core</span>
+        </div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#d97438;">12µ Vapor Barrier</span>
       </div>
       <div class="spec-row">
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#b9cac6;">Hot retention</span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">18 hours</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#b0b8bc]"></span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#d8e4f3;">316L Stainless Vacuum Wall</span>
+        </div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#b0b8bc;">0.0001 Torr</span>
       </div>
       <div class="spec-row">
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#b9cac6;">Exterior sweat</span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#0ce4d1;">Zero</span>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#68ffed]"></span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#d8e4f3;">Hermetic Silicone Gasket Stack</span>
+        </div>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:#68ffed;">Medical Grade</span>
       </div>
     </div>
-    <p class="reveal reveal-delay-3" style="font-size:14px;line-height:1.7;color:#849491;">
-      Copper vapor deposition reflects radiant infrared. Triple-stage aerospace annealing. No kinetic heat transfer.
-    </p>
+
+    <!-- Thermal Slider Simulation -->
+    <div class="p-4 rounded-2xl bg-surface-container-low/90 border border-white/5 reveal reveal-delay-3">
+      <div class="flex justify-between items-center mb-2">
+        <span class="font-heading text-xs uppercase tracking-wider text-on-surface">Thermal Lock Simulator</span>
+        <span class="font-heading text-base font-bold text-primary" id="tempValue">4°C / 39°F</span>
+      </div>
+      <input class="w-full accent-primary-container bg-surface-container cursor-pointer h-2 rounded-lg" id="tempSlider" max="95" min="2" type="range" value="4"/>
+      <div class="flex justify-between text-on-surface-variant text-[10px] uppercase font-heading tracking-wider pt-2">
+        <span>Glacial (2°C)</span>
+        <span class="text-primary font-bold" id="retentionStatus">36.0h Ice Locked</span>
+        <span>Boiling (95°C)</span>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ═══ SECTION 3: PURITY ══════════════════════════════════ -->
+<!-- ═══ SECTION 3: PURITY (HYDRATION OS & UV-C) ═══════════ -->
 <section id="purity" class="section" style="justify-content:flex-start;">
-  <div style="max-width:460px;width:100%;">
+  <div style="max-width:480px;width:100%;">
     <div class="feature-pill reveal" style="margin-bottom:1.25rem;">
-      <span class="dot"></span> Hydration OS + 280nm UV-C
+      <span class="dot"></span> Chapter 03 // Intelligent Metrology
     </div>
-    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.025em;margin:0 0 1.25rem;">
-      Sterile.<br>Always.
+    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,50px);font-weight:700;letter-spacing:-0.025em;margin:0 0 1.25rem;line-height:1.1;">
+      280nm Photonic<br><span style="color:#8afaff;">Self-Purification</span>
     </h2>
-    <div class="glass-card reveal reveal-delay-2" style="margin-bottom:1rem;">
+
+    <!-- UV-C Sanitation Card -->
+    <div class="glass-card reveal reveal-delay-2" style="margin-bottom:1.25rem;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#b9cac6;">UV-C Photonic Sterilization</span>
-        <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;padding:2px 10px;border-radius:9999px;background:rgba(12,228,209,0.12);color:#0ce4d1;letter-spacing:0.06em;text-transform:uppercase;">Active</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#b9cac6;">Optical UV-C Sterilization</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;padding:2px 10px;border-radius:9999px;background:rgba(12,228,209,0.12);color:#0ce4d1;letter-spacing:0.06em;text-transform:uppercase;">Autonomous Active</span>
       </div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;color:#8afaff;letter-spacing:-0.02em;">99.9%</div>
-      <div style="font-size:11px;color:#849491;margin-top:2px;text-transform:uppercase;letter-spacing:0.06em;">Pathogen elimination per cycle</div>
-      <div style="margin-top:1rem;height:3px;border-radius:9999px;background:rgba(255,255,255,0.08);overflow:hidden;">
-        <div id="uv-track" style="height:100%;width:0%;background:linear-gradient(90deg,#0ce4d1,#8afaff);border-radius:9999px;box-shadow:0 0 10px #0ce4d1;transition:width 1.5s cubic-bezier(.22,1,.36,1);"></div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:700;color:#8afaff;letter-spacing:-0.02em;">99.99%</div>
+      <div style="font-size:11px;color:#849491;margin-top:2px;text-transform:uppercase;letter-spacing:0.06em;">Biofilm, Bacteria & Mold Neutralized</div>
+      
+      <!-- Pulsing Laser Cycle Track -->
+      <div style="margin-top:1.25rem;height:4px;border-radius:9999px;background:rgba(255,255,255,0.08);overflow:hidden;">
+        <div id="uv-track" style="height:100%;width:78%;background:linear-gradient(90deg,#0ce4d1,#8afaff);border-radius:9999px;box-shadow:0 0 12px #0ce4d1;animation:uv-pulse 2s infinite ease-in-out;"></div>
       </div>
-      <div style="display:flex;justify-content:space-between;margin-top:0.5rem;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;color:#849491;text-transform:uppercase;">
-        <span>Cycle: 60s pulse</span><span>Next: 42 min</span>
+      <div style="display:flex;justify-content:space-between;margin-top:0.6rem;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;color:#849491;text-transform:uppercase;">
+        <span>Pulse Cycle: 60 Seconds</span>
+        <span>Next Automatic Sweep: 42 Min</span>
       </div>
     </div>
+
+    <!-- Health Telemetry Integrations -->
     <div class="reveal reveal-delay-3" style="display:flex;gap:0.5rem;flex-wrap:wrap;">
       <span class="feature-pill" style="font-size:9px;">Bluetooth 5.4 LE</span>
-      <span class="feature-pill" style="font-size:9px;">Apple Health</span>
+      <span class="feature-pill" style="font-size:9px;">Apple HealthKit</span>
       <span class="feature-pill" style="font-size:9px;">Garmin Connect</span>
+      <span class="feature-pill" style="font-size:9px;">Whoop 4.0 API</span>
     </div>
   </div>
 </section>
 
-<!-- ═══ SECTION 4: CONFIGURE ══════════════════════════════ -->
+<!-- ═══ SECTION 4: CONFIGURE (BESPOKE EDITIONS) ════════════ -->
 <section id="configure" class="section" style="justify-content:center;flex-direction:column;align-items:center;text-align:center;">
   <div style="max-width:580px;width:100%;">
     <div class="feature-pill reveal" style="margin:0 auto 1.25rem;">
-      <span class="dot"></span> Bespoke Configuration
+      <span class="dot"></span> Chapter 04 // Bespoke Commissions
     </div>
-    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-0.025em;margin:0 0 0.75rem;">
-      Make it yours.
+    <h2 class="reveal reveal-delay-1" style="font-family:'Space Grotesk',sans-serif;font-size:clamp(32px,4vw,50px);font-weight:700;letter-spacing:-0.025em;margin:0 0 0.75rem;">
+      Configure Your Vessel
     </h2>
-    <p class="reveal reveal-delay-2" style="font-size:15px;color:#849491;margin:0 0 2.5rem;line-height:1.6;">
-      Choose your finish. Reserve your edition.
+    <p class="reveal reveal-delay-2" style="font-size:15px;color:#849491;margin:0 0 2rem;line-height:1.6;">
+      Select your aerospace finish. The 3D vessel updates in real-time.
     </p>
-    <div class="reveal reveal-delay-2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:2rem;">
-      <button class="finish-btn active" onclick="selectFinish(this)">
-        <span class="finish-swatch" style="background:linear-gradient(135deg,#0a1620,#1a2f42);"></span>
+
+    <!-- 1. Color Finish Selector -->
+    <div class="reveal reveal-delay-2" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:1.5rem;">
+      <button class="finish-btn active" data-color="#7a8878" onclick="setVesselFinish(this, '#7a8878')">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#677365,#8c988a);box-shadow:0 0 12px rgba(122,136,120,0.5);"></span>
+        Sage Edition
+      </button>
+      <button class="finish-btn" data-color="#14202c" onclick="setVesselFinish(this, '#14202c')">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#0a131b,#1c2d3d);"></span>
         Obsidian
       </button>
-      <button class="finish-btn" onclick="selectFinish(this)">
-        <span class="finish-swatch" style="background:linear-gradient(135deg,#0ce4d1,#38e1ff);box-shadow:0 0 12px rgba(12,228,209,0.5);"></span>
+      <button class="finish-btn" data-color="#0ce4d1" onclick="setVesselFinish(this, '#0ce4d1')">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#0ce4d1,#38e1ff);box-shadow:0 0 14px rgba(12,228,209,0.5);"></span>
         Cyber Cyan
       </button>
-      <button class="finish-btn" onclick="selectFinish(this)">
-        <span class="finish-swatch" style="background:linear-gradient(135deg,#c0d8e4,#f4fafb);"></span>
-        Glacier
-      </button>
-      <button class="finish-btn" onclick="selectFinish(this)">
-        <span class="finish-swatch" style="background:linear-gradient(135deg,#6b7a88,#b0bec5);"></span>
-        Raw Ti
+      <button class="finish-btn" data-color="#8c97a2" onclick="setVesselFinish(this, '#8c97a2')">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#6f7983,#b2bdc8);"></span>
+        Raw Titanium
       </button>
     </div>
-    <div class="reveal reveal-delay-3" style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2rem;">
-      <button id="vol-650" onclick="selectVol(650)" style="padding:1.1rem 1rem;border-radius:16px;border:1px solid #0ce4d1;background:rgba(12,228,209,0.08);cursor:pointer;text-align:left;transition:all 0.25s;">
+
+    <!-- 2. Volumetric Specification -->
+    <div class="reveal reveal-delay-3" style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+      <button id="vol-650" onclick="setVesselVolume(650)" style="padding:1.1rem 1rem;border-radius:18px;border:1px solid #0ce4d1;background:rgba(12,228,209,0.1);cursor:pointer;text-align:left;transition:all 0.25s;">
         <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#d8e4f3;">650 ml</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#849491;margin-top:2px;">Standard EDC — $349</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#0ce4d1;margin-top:2px;">Standard EDC Spec — $349</div>
       </button>
-      <button id="vol-950" onclick="selectVol(950)" style="padding:1.1rem 1rem;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:rgba(21,33,44,0.6);cursor:pointer;text-align:left;transition:all 0.25s;">
+      <button id="vol-950" onclick="setVesselVolume(950)" style="padding:1.1rem 1rem;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(21,33,44,0.6);cursor:pointer;text-align:left;transition:all 0.25s;">
         <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#d8e4f3;">950 ml</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#849491;margin-top:2px;">Expedition — $364</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#849491;margin-top:2px;">Expedition Spec — $364</div>
       </button>
     </div>
-    <button class="btn-primary reveal reveal-delay-3" style="width:100%;justify-content:center;padding:1.1rem;font-size:13px;" type="button">
-      Reserve Your Edition →
+
+    <!-- 3. Laser Engraving Input -->
+    <div class="reveal reveal-delay-3 mb-6 p-4 rounded-2xl bg-surface-container-low/80 border border-white/5 text-left">
+      <div class="flex justify-between items-center mb-2">
+        <label class="font-heading text-xs uppercase tracking-wider text-on-surface">Laser Etched Call-Sign</label>
+        <span class="font-heading text-[10px] text-primary uppercase">Complimentary Edition</span>
+      </div>
+      <div class="flex gap-2">
+        <input class="w-full bg-surface-container-lowest px-4 py-2.5 rounded-xl text-on-surface font-heading text-sm uppercase tracking-wider placeholder:text-outline-variant focus:outline-none focus:ring-2 focus:ring-primary" id="laserInput" maxlength="12" placeholder="CALLSIGN (MAX 12)" type="text" value="SIP2O"/>
+      </div>
+    </div>
+
+    <!-- Checkout Action Button -->
+    <button class="btn-primary reveal reveal-delay-3" style="width:100%;justify-content:center;padding:1.15rem;font-size:13px;" type="button">
+      Reserve Your Edition — Guaranteed Dispatch →
     </button>
-    <div class="reveal" style="margin-top:0.75rem;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#849491;">
-      30-Day Risk-Free &nbsp;·&nbsp; 100-Year Hull Warranty
+    <div class="reveal" style="margin-top:0.85rem;font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#849491;">
+      100-Year Indestructible Hull Warranty &nbsp;·&nbsp; 30-Day Risk-Free Field Test
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ════════════════════════════════════════════ -->
-<footer style="position:relative;z-index:20;padding:3rem;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+<!-- ═══ FOOTER ═══════════════════════════════════════════ -->
+<footer style="position:relative;z-index:20;padding:3rem;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
   <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:#d8e4f3;">sip<span style="color:#0ce4d1;">2O</span></span>
-  <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#3b4a47;">© 2026 sip2O Corp. All rights reserved.</span>
+  <span style="font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;color:#849491;">© 2026 sip2O Hydrology Corp. All rights reserved.</span>
 </footer>
 
+<style>
+@keyframes uv-pulse {
+  0%, 100% { opacity: 1; transform: scaleX(1); }
+  50% { opacity: 0.65; transform: scaleX(0.97); }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════════════════
+     THREE.JS INTERACTIVE SCROLLYTELLING ENGINE
+     Matches user product: Sage Green chassis, topographic
+     graphics, angled silver spout, and exploded inner core!
+     ═══════════════════════════════════════════════════════ -->
 <script>
-/* ═══════════════════════════════════════════════════════════
-   SCROLL-DRIVEN PRODUCT IMAGE ANIMATION
-   ═══════════════════════════════════════════════════════════ */
 (function() {
-  var imgHero     = document.getElementById('img-hero');
-  var imgExploded = document.getElementById('img-exploded');
+  const container = document.getElementById('threejs-canvas-wrap');
+  if (!container || typeof THREE === 'undefined') return;
 
-  // Current (lerped) values
-  var curLeft = 75, curTop = 50, curRot = -18, curScale = 1.0;
-  var curHeroOp = 1, curExplOp = 0;
+  const scene = new THREE.Scene();
+  const width = container.clientWidth || window.innerWidth;
+  const height = container.clientHeight || window.innerHeight;
+  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+  camera.position.set(0, 0, 9);
 
-  // Targets (set on scroll)
-  var tLeft = 75, tTop = 50, tRot = -18, tScale = 1.0;
-  var tHeroOp = 1, tExplOp = 0;
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+  container.appendChild(renderer.domElement);
 
-  function onScroll() {
-    var scrollH = document.documentElement.scrollHeight - window.innerHeight;
-    if (scrollH <= 0) return;
-    var p = Math.min(Math.max(window.scrollY / scrollH, 0), 1);
+  // ── High-Refinement Lights ─────────────────────────────
+  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
 
-    if (p < 0.25) {
-      // ── HERO: bottle right, tilted like product shot ──
-      var t = p / 0.25;
-      tLeft   = 75 - t * 5;
-      tTop    = 50 + t * 2;
-      tRot    = -18 + t * 6;
-      tScale  = 1.0 + t * 0.06;
-      tHeroOp = 1;
-      tExplOp = 0;
-    } else if (p < 0.5) {
-      // ── PERFORMANCE: sweep to left, crossfade to exploded ──
-      var t = (p - 0.25) / 0.25;
-      tLeft   = 70 - t * 45;
-      tTop    = 52 - t * 4;
-      tRot    = -12 + t * 16;
-      tScale  = 1.06 + t * 0.1;
-      tHeroOp = 1 - Math.max(0, (t - 0.5) * 2);
-      tExplOp = Math.max(0, (t - 0.5) * 2);
-    } else if (p < 0.75) {
-      // ── PURITY: drift right, crossfade back to hero ──
-      var t = (p - 0.5) / 0.25;
-      tLeft   = 25 + t * 50;
-      tTop    = 48 + t * 2;
-      tRot    = 4 - t * 14;
-      tScale  = 1.16 - t * 0.04;
-      tExplOp = 1 - Math.max(0, (t - 0.4) * 1.67);
-      tHeroOp = Math.max(0, (t - 0.4) * 1.67);
+  const keyLight = new THREE.DirectionalLight(0x0ce4d1, 2.6);
+  keyLight.position.set(6, 8, 6);
+  scene.add(keyLight);
+
+  const copperLight = new THREE.DirectionalLight(0xd97438, 2.0);
+  copperLight.position.set(-6, -4, 4);
+  scene.add(copperLight);
+
+  const rimLight = new THREE.DirectionalLight(0x7df9ff, 2.8);
+  rimLight.position.set(-7, 6, -5);
+  scene.add(rimLight);
+
+  // ── Dynamic Canvas Texture for Outer Chassis ───────────
+  // Creates the exact vertical "sip2O" branding + mountain line contours
+  function createBottleTexture(baseColorHex, text) {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1024;
+    canvas.height = 1024;
+    const ctx = canvas.getContext('2d');
+
+    // Base ceramic matte tone
+    ctx.fillStyle = baseColorHex;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Subtle brushed horizontal micro-noise
+    ctx.fillStyle = 'rgba(255,255,255,0.03)';
+    for (let i = 0; i < 200; i++) {
+      ctx.fillRect(0, Math.random() * 1024, 1024, Math.random() * 2);
+    }
+
+    // Topographic / Geometric Contour Waves on lower third
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+
+    function drawWave(yBase, amp, freq, offset) {
+      ctx.beginPath();
+      for (let x = 0; x <= 1024; x += 16) {
+        const y = yBase + Math.sin((x + offset) * freq) * amp + Math.cos(x * freq * 1.8) * (amp * 0.5);
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    drawWave(740, 30, 0.012, 0);
+    drawWave(790, 42, 0.010, 80);
+    drawWave(840, 35, 0.014, 160);
+    drawWave(890, 25, 0.009, 240);
+
+    // Wireframe triangulation mesh across the wave
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+    ctx.lineWidth = 1.5;
+    for (let x = 60; x < 960; x += 90) {
+      ctx.beginPath();
+      ctx.moveTo(x, 700 + Math.sin(x * 0.01) * 20);
+      ctx.lineTo(x + 45, 820 + Math.cos(x * 0.01) * 30);
+      ctx.lineTo(x - 45, 820 + Math.cos(x * 0.01) * 30);
+      ctx.closePath();
+      ctx.stroke();
+    }
+
+    // Vertical Clean Typography: "sip2O"
+    ctx.save();
+    ctx.translate(512, 420);
+    ctx.rotate(-Math.PI / 2);
+    ctx.font = 'bold 92px "Space Grotesk", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#ffffff';
+    ctx.shadowColor = 'rgba(0,0,0,0.2)';
+    ctx.shadowBlur = 8;
+    ctx.fillText(text || 'sip2O', 0, 0);
+    ctx.restore();
+
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.ClampToEdgeWrapping;
+    return tex;
+  }
+
+  // ── Materials ──────────────────────────────────────────
+  let bottleTex = createBottleTexture('#7a8878', 'sip2O');
+
+  const chassisMat = new THREE.MeshPhongMaterial({
+    map: bottleTex,
+    color: 0xffffff,
+    specular: 0x334433,
+    shininess: 35,
+    flatShading: false
+  });
+
+  const silverSpoutMat = new THREE.MeshStandardMaterial({
+    color: 0xd0d6d9,
+    metalness: 0.88,
+    roughness: 0.25,
+  });
+
+  const copperMat = new THREE.MeshStandardMaterial({
+    color: 0xd97438,
+    metalness: 0.95,
+    roughness: 0.18,
+    emissive: 0x3a1400,
+    emissiveIntensity: 0.3
+  });
+
+  const steelMat = new THREE.MeshStandardMaterial({
+    color: 0x98a2aa,
+    metalness: 0.92,
+    roughness: 0.28
+  });
+
+  const sealMat = new THREE.MeshPhongMaterial({
+    color: 0x22303c,
+    specular: 0x0ce4d1,
+    shininess: 40
+  });
+
+  const cyanLedMat = new THREE.MeshBasicMaterial({
+    color: 0x0ce4d1
+  });
+
+  // ── Build Multi-Tier Deconstructable 3D Vessel ─────────
+  const bottleGroup = new THREE.Group();
+
+  // Tier 1: Outer Ceramic Shell (slides left in exploded mode)
+  const chassisGroup = new THREE.Group();
+
+  const bodyGeo = new THREE.CylinderGeometry(0.95, 0.92, 3.8, 56);
+  const bodyMesh = new THREE.Mesh(bodyGeo, chassisMat);
+  bodyMesh.position.y = -0.3;
+  chassisGroup.add(bodyMesh);
+
+  // Ergonomic shoulder taper
+  const shoulderGeo = new THREE.CylinderGeometry(0.72, 0.95, 0.85, 56);
+  const shoulderMesh = new THREE.Mesh(shoulderGeo, chassisMat);
+  shoulderMesh.position.y = 1.95;
+  chassisGroup.add(shoulderMesh);
+
+  bottleGroup.add(chassisGroup);
+
+  // Tier 2: Radiant Copper Core (emerges forward-right in exploded mode)
+  const copperGroup = new THREE.Group();
+  const copperGeo = new THREE.CylinderGeometry(0.82, 0.82, 3.6, 48);
+  const copperMesh = new THREE.Mesh(copperGeo, copperMat);
+  copperMesh.position.y = -0.2;
+  copperGroup.add(copperMesh);
+  bottleGroup.add(copperGroup);
+
+  // Tier 3: 316L Stainless Vacuum Interstice Cylinder
+  const steelGroup = new THREE.Group();
+  const steelGeo = new THREE.CylinderGeometry(0.72, 0.72, 3.7, 48);
+  const steelMesh = new THREE.Mesh(steelGeo, steelMat);
+  steelMesh.position.y = -0.15;
+  steelGroup.add(steelMesh);
+  bottleGroup.add(steelGroup);
+
+  // Tier 4: Exploding Cap & Collar Stack
+  const capStackGroup = new THREE.Group();
+
+  // Threaded collar ring
+  const collarGeo = new THREE.CylinderGeometry(0.62, 0.62, 0.35, 48);
+  const collarMesh = new THREE.Mesh(collarGeo, steelMat);
+  collarMesh.position.y = 2.45;
+  capStackGroup.add(collarMesh);
+
+  // Silicone airtight seal ring
+  const gasketGeo = new THREE.TorusGeometry(0.61, 0.05, 16, 48);
+  gasketGeo.rotateX(Math.PI / 2);
+  const gasketMesh = new THREE.Mesh(gasketGeo, sealMat);
+  gasketMesh.position.y = 2.68;
+  capStackGroup.add(gasketMesh);
+
+  // Glowing Smart LED Ring
+  const ringGeo = new THREE.TorusGeometry(0.62, 0.035, 16, 48);
+  ringGeo.rotateX(Math.PI / 2);
+  const ringMesh = new THREE.Mesh(ringGeo, cyanLedMat);
+  ringMesh.position.y = 2.76;
+  capStackGroup.add(ringMesh);
+
+  // Angled Brushed Silver Ergonomic Spout Cap (matching user's photo!)
+  const spoutGeo = new THREE.CylinderGeometry(0.58, 0.62, 0.75, 48);
+  // Give it the signature slanted aerodynamic cut:
+  const posAttr = spoutGeo.attributes.position;
+  for (let i = 0; i < posAttr.count; i++) {
+    const y = posAttr.getY(i);
+    const z = posAttr.getZ(i);
+    if (y > 0.1) {
+      posAttr.setY(i, y + z * 0.32); // slanted ergonomic drinking lip
+    }
+  }
+  spoutGeo.computeVertexNormals();
+
+  const spoutMesh = new THREE.Mesh(spoutGeo, silverSpoutMat);
+  spoutMesh.position.y = 3.12;
+  capStackGroup.add(spoutMesh);
+
+  bottleGroup.add(capStackGroup);
+
+  // ── Orbiting Hydration Particles / Droplets ────────────
+  const dropletCount = 65;
+  const pGeo = new THREE.SphereGeometry(0.042, 12, 12);
+  const pMat = new THREE.MeshPhongMaterial({
+    color: 0x68ffed,
+    transparent: true,
+    opacity: 0.7,
+    shininess: 90
+  });
+
+  const particles = [];
+  for (let i = 0; i < dropletCount; i++) {
+    const p = new THREE.Mesh(pGeo, pMat);
+    const angle = Math.random() * Math.PI * 2;
+    const radius = 1.4 + Math.random() * 1.5;
+    const y = (Math.random() - 0.5) * 5.6;
+    p.position.set(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
+    p.userData = { angle, radius, speed: 0.005 + Math.random() * 0.012, yBase: y };
+    bottleGroup.add(p);
+    particles.push(p);
+  }
+
+  scene.add(bottleGroup);
+
+  // Initial Transform Pose (Hero state)
+  bottleGroup.position.x = 1.35;
+  bottleGroup.position.y = 0;
+  bottleGroup.rotation.y = -0.35;
+  bottleGroup.rotation.z = 0.14;
+
+  let targetX = 1.35;
+  let targetY = 0;
+  let targetRotY = -0.35;
+  let targetRotZ = 0.14;
+  let targetScale = 1.05;
+  let targetExplode = 0.0; // 0.0 = assembled, 1.0 = fully exploded into layers
+
+  let currentExplode = 0.0;
+
+  // ── Scroll Scrollytelling Choreography ──────────────────
+  function updateScrollChoreography() {
+    const maxScroll = (document.documentElement.scrollHeight - window.innerHeight) || 1;
+    const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+
+    if (progress < 0.25) {
+      // ── PHASE 1: HERO (Genesis) ──
+      // Bottle proudly displayed on the right, natural proud angle
+      const t = progress / 0.25;
+      targetX = 1.35 - t * 0.25;
+      targetY = 0;
+      targetRotY = -0.35 + t * 0.7;
+      targetRotZ = 0.14 - t * 0.08;
+      targetScale = 1.05 + t * 0.05;
+      targetExplode = 0.0;
+    } else if (progress < 0.52) {
+      // ── PHASE 2: CRYO CORE (Performance Exploded View) ──
+      // Bottle glides left and explodes into its concentric layers!
+      const t = (progress - 0.25) / 0.27;
+      targetX = 1.1 - t * 2.3; // glides to left (x = -1.2)
+      targetY = 0.1 + t * 0.15;
+      targetRotY = 0.35 + t * 2.2;
+      targetRotZ = 0.06 - Math.sin(t * Math.PI) * 0.25;
+      targetScale = 1.1 + t * 0.1;
+      targetExplode = Math.min(1.0, t * 1.3); // separates layers
+    } else if (progress < 0.78) {
+      // ── PHASE 3: HYDRATION OS & UV-C PURITY ──
+      // Layers assemble back, camera zooms in on smart cap & LED indicator
+      const t = (progress - 0.52) / 0.26;
+      targetX = -1.2 + t * 2.4; // drifts right
+      targetY = 0.25 - t * 1.55; // moves down so cap is at center view
+      targetRotY = 2.55 + t * 1.8;
+      targetRotZ = -0.18 + t * 0.35;
+      targetScale = 1.2 + t * 0.15; // zoomed in detail
+      targetExplode = Math.max(0.0, 1.0 - t * 1.8); // reassembles smoothly
     } else {
-      // ── CONFIGURE: center heroic pose ──
-      var t = (p - 0.75) / 0.25;
-      tLeft   = 75 - t * 25;
-      tTop    = 50 - t * 6;
-      tRot    = -10 + t * 10;
-      tScale  = 1.12 + t * 0.05;
-      tHeroOp = 1;
-      tExplOp = 0;
+      // ── PHASE 4: BESPOKE CONFIGURATOR ──
+      // Heroic 3/4 turn, center-stage showcase
+      const t = (progress - 0.78) / 0.22;
+      targetX = 1.2 - t * 1.2; // center x = 0
+      targetY = -1.3 + t * 1.2; // center y = -0.1
+      targetRotY = 4.35 + t * 1.4;
+      targetRotZ = 0.17 - t * 0.22;
+      targetScale = 1.15;
+      targetExplode = 0.0;
     }
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('scroll', updateScrollChoreography, { passive: true });
 
-  // Animation loop — lerp for buttery smooth motion
-  var breathing = 0;
-  var LERP = 0.06;
+  // ── Render & Animation Loop (Lerped 60fps) ─────────────
+  let clock = 0;
+  const LERP_FACTOR = 0.075;
 
-  function lerp(a, b, f) { return a + (b - a) * f; }
+  function animate() {
+    requestAnimationFrame(animate);
+    clock += 0.015;
 
-  function tick() {
-    requestAnimationFrame(tick);
-    breathing += 0.014;
+    // Smooth transform interpolation
+    bottleGroup.position.x += (targetX - bottleGroup.position.x) * LERP_FACTOR;
+    bottleGroup.position.y += (targetY - bottleGroup.position.y) * LERP_FACTOR;
+    bottleGroup.rotation.y += (targetRotY - bottleGroup.rotation.y) * LERP_FACTOR;
+    bottleGroup.rotation.z += (targetRotZ - bottleGroup.rotation.z) * LERP_FACTOR;
 
-    curLeft   = lerp(curLeft,   tLeft,   LERP);
-    curTop    = lerp(curTop,    tTop,    LERP);
-    curRot    = lerp(curRot,    tRot,    LERP);
-    curScale  = lerp(curScale,  tScale,  LERP);
-    curHeroOp = lerp(curHeroOp, tHeroOp, LERP * 1.4);
-    curExplOp = lerp(curExplOp, tExplOp, LERP * 1.4);
+    const currentScale = bottleGroup.scale.x + (targetScale - bottleGroup.scale.x) * LERP_FACTOR;
+    bottleGroup.scale.set(currentScale, currentScale, currentScale);
 
-    // Breathing float (subtle vertical bob)
-    var floatY = Math.sin(breathing * 1.5) * 4;
+    // Smooth explode interpolation
+    currentExplode += (targetExplode - currentExplode) * LERP_FACTOR;
 
-    // Position both images the same way
-    var tx = 'translate(-50%,-50%) rotate(' + curRot.toFixed(2) + 'deg) scale(' + curScale.toFixed(4) + ')';
+    // Apply exploded offsets to each layer (matching user's exploded image!):
+    chassisGroup.position.x = -currentExplode * 0.85;
+    chassisGroup.position.z = currentExplode * 0.4;
 
-    imgHero.style.left      = curLeft.toFixed(2) + '%';
-    imgHero.style.top       = 'calc(' + curTop.toFixed(2) + '% + ' + floatY.toFixed(1) + 'px)';
-    imgHero.style.transform = tx;
-    imgHero.style.opacity   = Math.max(0, Math.min(1, curHeroOp)).toFixed(3);
+    copperGroup.position.x = currentExplode * 0.35;
+    copperGroup.position.z = currentExplode * 0.65;
 
-    imgExploded.style.left      = curLeft.toFixed(2) + '%';
-    imgExploded.style.top       = 'calc(' + curTop.toFixed(2) + '% + ' + floatY.toFixed(1) + 'px)';
-    imgExploded.style.transform = tx;
-    imgExploded.style.opacity   = Math.max(0, Math.min(1, curExplOp)).toFixed(3);
+    steelGroup.position.x = currentExplode * 1.05;
+    steelGroup.position.z = currentExplode * 0.2;
+
+    // Lift cap layers upward
+    collarMesh.position.y = 2.45 + currentExplode * 0.55;
+    gasketMesh.position.y = 2.68 + currentExplode * 0.95;
+    ringMesh.position.y   = 2.76 + currentExplode * 1.35;
+    spoutMesh.position.y  = 3.12 + currentExplode * 1.85;
+
+    // Subtle gentle breathing float
+    bottleGroup.position.y += Math.sin(clock * 1.6) * 0.003;
+
+    // Orbit hydration droplets
+    particles.forEach(p => {
+      p.userData.angle += p.userData.speed;
+      p.position.x = Math.cos(p.userData.angle) * p.userData.radius;
+      p.position.z = Math.sin(p.userData.angle) * p.userData.radius;
+      p.position.y = p.userData.yBase + Math.sin(clock * 1.8 + p.userData.angle) * 0.12;
+    });
+
+    // Smart LED Ring Glow Pulse
+    const pulseIntensity = 0.6 + Math.sin(clock * 3.5) * 0.35;
+    cyanLedMat.color.setRGB(0.04 * pulseIntensity, 0.9 * pulseIntensity, 0.85 * pulseIntensity);
+
+    renderer.render(scene, camera);
   }
+  animate();
 
-  // Kick off
-  onScroll();
-  tick();
+  // Responsive resize
+  window.addEventListener('resize', () => {
+    const newW = container.clientWidth || window.innerWidth;
+    const newH = container.clientHeight || window.innerHeight;
+    camera.aspect = newW / newH;
+    camera.updateProjectionMatrix();
+    renderer.setSize(newW, newH);
+  });
+
+  // ── Global Interface for Real-Time Finish Customizer ──
+  window.__setVesselColor = function(colorHex, labelText) {
+    const newTex = createBottleTexture(colorHex, labelText || 'sip2O');
+    chassisMat.map = newTex;
+    chassisMat.needsUpdate = true;
+  };
 })();
 
-/* ── Scroll progress bar ── */
+// ── Interactive Finish Swatches ─────────────────────────
+function setVesselFinish(btn, colorHex) {
+  document.querySelectorAll('.finish-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const label = document.getElementById('laserInput')?.value || 'sip2O';
+  if (window.__setVesselColor) {
+    window.__setVesselColor(colorHex, label);
+  }
+}
+
+// ── Interactive Laser Engraving Update ──────────────────
+document.getElementById('laserInput')?.addEventListener('input', function(e) {
+  const activeBtn = document.querySelector('.finish-btn.active');
+  const color = activeBtn ? activeBtn.getAttribute('data-color') : '#7a8878';
+  if (window.__setVesselColor) {
+    window.__setVesselColor(color, e.target.value || 'sip2O');
+  }
+});
+
+// ── Volume Selection ────────────────────────────────────
+function setVesselVolume(vol) {
+  const b650 = document.getElementById('vol-650');
+  const b950 = document.getElementById('vol-950');
+  if (vol === 650) {
+    b650.style.borderColor = '#0ce4d1'; b650.style.background = 'rgba(12,228,209,0.1)';
+    b950.style.borderColor = 'rgba(255,255,255,0.08)'; b950.style.background = 'rgba(21,33,44,0.6)';
+  } else {
+    b950.style.borderColor = '#0ce4d1'; b950.style.background = 'rgba(12,228,209,0.1)';
+    b650.style.borderColor = 'rgba(255,255,255,0.08)'; b650.style.background = 'rgba(21,33,44,0.6)';
+  }
+}
+
+// ── Thermal Slider Interaction ──────────────────────────
+const tempSlider = document.getElementById('tempSlider');
+const tempValue = document.getElementById('tempValue');
+const retentionStatus = document.getElementById('retentionStatus');
+
+if (tempSlider && tempValue && retentionStatus) {
+  tempSlider.addEventListener('input', function(e) {
+    const val = parseInt(e.target.value, 10);
+    const fahr = Math.round((val * 9/5) + 32);
+    tempValue.textContent = val + '°C / ' + fahr + '°F';
+    if (val <= 10) {
+      retentionStatus.textContent = '36.0h Sub-Zero Locked';
+      retentionStatus.style.color = '#0ce4d1';
+    } else if (val <= 45) {
+      retentionStatus.textContent = '24.0h Ambient Hydration';
+      retentionStatus.style.color = '#8afaff';
+    } else {
+      retentionStatus.textContent = '18.0h Thermal Hot Retained';
+      retentionStatus.style.color = '#d97438';
+    }
+  });
+}
+
+// ── Scroll Progress & Reveal Trigger ────────────────────
 window.addEventListener('scroll', function() {
-  var p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+  const p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
   document.getElementById('scroll-progress').style.width = (p * 100) + '%';
 }, { passive: true });
 
-/* ── Reveal on scroll ── */
-var reveals = document.querySelectorAll('.reveal');
-var revealObs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-reveals.forEach(function(el) { revealObs.observe(el); });
-
-/* ── UV track animation ── */
-var uvObs = new IntersectionObserver(function(entries) {
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
-    if (e.isIntersecting) document.getElementById('uv-track').style.width = '72%';
+    if (e.isIntersecting) e.target.classList.add('visible');
   });
-}, { threshold: 0.3 });
-var puritySection = document.getElementById('purity');
-if (puritySection) uvObs.observe(puritySection);
+}, { threshold: 0.12 });
+reveals.forEach(el => revealObs.observe(el));
 
-/* ── Chapter dots ── */
-var sectionIds = ['hero','performance','purity','configure'];
-var dots = document.querySelectorAll('.cdot');
-dots.forEach(function(dot, i) {
-  dot.addEventListener('click', function() {
-    document.getElementById(sectionIds[i]).scrollIntoView({ behavior: 'smooth' });
+// ── Side Chapter HUD Observer ───────────────────────────
+const sectionIds = ['hero', 'performance', 'purity', 'configure'];
+const dots = document.querySelectorAll('.cdot');
+dots.forEach((dot, idx) => {
+  dot.addEventListener('click', () => {
+    document.getElementById(sectionIds[idx])?.scrollIntoView({ behavior: 'smooth' });
   });
 });
-var sectionObs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) {
-      var idx = sectionIds.indexOf(e.target.id);
-      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
+
+const sectionObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = sectionIds.indexOf(entry.target.id);
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     }
   });
-}, { threshold: 0.35 });
-sectionIds.forEach(function(id) { var el = document.getElementById(id); if(el) sectionObs.observe(el); });
-
-/* ── Finish picker ── */
-function selectFinish(btn) {
-  document.querySelectorAll('.finish-btn').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-}
-
-/* ── Volume picker ── */
-function selectVol(v) {
-  var a = document.getElementById('vol-650');
-  var b = document.getElementById('vol-950');
-  if (v === 650) {
-    a.style.borderColor = '#0ce4d1'; a.style.background = 'rgba(12,228,209,0.08)';
-    b.style.borderColor = 'rgba(255,255,255,0.08)'; b.style.background = 'rgba(21,33,44,0.6)';
-  } else {
-    b.style.borderColor = '#0ce4d1'; b.style.background = 'rgba(12,228,209,0.08)';
-    a.style.borderColor = 'rgba(255,255,255,0.08)'; a.style.background = 'rgba(21,33,44,0.6)';
-  }
-}
+}, { threshold: 0.4 });
+sectionIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObs.observe(el);
+});
 </script>
 </body>
 </html>
