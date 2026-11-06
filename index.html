@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>sip2O — Autonomous Fluid Architecture</title>
+<title>sip2O — Luxury Aerospace Hydration</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 tailwind.config = {
@@ -14,15 +14,13 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        void: '#050505',
-        'void-slate': '#090c10',
-        'void-charcoal': '#12161d',
+        void: '#07090d',
+        'slate-void': '#0a0d13',
+        'slate-card': '#10141c',
         'electric-blue': '#00f0ff',
-        'electric-glow': '#7df9ff',
-        'titanium-light': '#e6edf3',
-        'titanium-slate': '#8b949e',
-        'titanium-dark': '#1e242d',
-        copper: '#d97438',
+        'electric-soft': '#7df9ff',
+        'matte-titanium': '#111419',
+        'hairline': 'rgba(255, 255, 255, 0.06)',
       },
       fontFamily: {
         heading: ['Space Grotesk', 'sans-serif'],
@@ -38,66 +36,79 @@ tailwind.config = {
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    background: #050505;
-    color: #e6edf3;
+    background: #080a0f;
+    color: #f0f4f8;
     font-family: 'Plus Jakarta Sans', sans-serif;
     overflow-x: hidden;
   }
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #050505; }
-  ::-webkit-scrollbar-thumb { background: #00f0ff; border-radius: 9999px; }
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: #07090d; }
+  ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.6); border-radius: 9999px; }
 
-  /* ═══ CINEMATIC SPOTLIGHT MATTE VOID ═══════════ */
-  .void-spotlight {
+  /* ═══ CINEMATIC VOLUMETRIC SPOTLIGHT & SLATE VOID ═══ */
+  .slate-void-bg {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
     background:
-      radial-gradient(circle at 62% 45%, rgba(0, 240, 255, 0.05) 0%, rgba(18, 30, 45, 0.2) 28%, rgba(10, 14, 20, 0.8) 55%, #050505 85%),
-      linear-gradient(180deg, #050505 0%, #080a0e 50%, #050505 100%);
+      radial-gradient(circle at 63% 46%, rgba(0, 240, 255, 0.065) 0%, rgba(22, 33, 48, 0.22) 28%, rgba(10, 13, 19, 0.88) 58%, #080a0f 85%),
+      linear-gradient(180deg, #07090d 0%, #0a0d14 50%, #07090d 100%);
   }
 
-  /* Atmospheric Lens Flare & Highlight Mist */
-  .lens-flare-disc {
+  /* Soft Volumetric Spotlight Glow */
+  .spotlight-glow {
     position: fixed;
-    top: 45%;
-    left: 62%;
+    top: 46%;
+    left: 63%;
     transform: translate(-50%, -50%);
-    width: 600px;
-    height: 600px;
+    width: 620px;
+    height: 620px;
     border-radius: 9999px;
-    background: radial-gradient(circle, rgba(0, 240, 255, 0.09) 0%, rgba(125, 249, 255, 0.03) 35%, transparent 70%);
-    filter: blur(50px);
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(125, 249, 255, 0.035) 40%, transparent 72%);
+    filter: blur(65px);
     pointer-events: none;
     z-index: 1;
   }
-  .lens-flare-ring {
+
+  /* ═══ 1PX TECHNICAL RADAR GRIDLINES & CONCENTRIC CIRCLES ═══ */
+  .radar-canvas-overlay {
     position: fixed;
-    top: 45%;
-    left: 62%;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* ═══ FOREGROUND HEAVILY BLURRED CAMERA LENS (DEPTH OF FIELD) ═══ */
+  .foreground-dof-lens {
+    position: fixed;
+    bottom: -130px;
+    right: -130px;
     width: 480px;
     height: 480px;
     border-radius: 9999px;
-    border: 1px solid rgba(0, 240, 255, 0.05);
-    box-shadow: 0 0 50px rgba(0, 240, 255, 0.025);
     pointer-events: none;
-    z-index: 1;
+    z-index: 40;
+    background: radial-gradient(circle at 35% 35%, rgba(20, 25, 34, 0.95) 0%, rgba(5, 7, 10, 0.98) 55%, #000000 100%);
+    box-shadow: inset 0 0 80px rgba(0, 240, 255, 0.08), 0 0 120px rgba(0, 0, 0, 0.9);
+    filter: blur(48px);
+    opacity: 0.92;
   }
-
-  /* Engineering Simulation Grid & Coordinate Axes */
-  .sim-grid-overlay {
+  .lens-metallic-bezel {
     position: fixed;
-    inset: 0;
+    bottom: -110px;
+    right: -110px;
+    width: 440px;
+    height: 440px;
+    border-radius: 9999px;
     pointer-events: none;
-    z-index: 2;
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(circle at 62% 45%, black 40%, transparent 85%);
-    -webkit-mask-image: radial-gradient(circle at 62% 45%, black 40%, transparent 85%);
+    z-index: 41;
+    border: 2px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.06);
+    filter: blur(28px);
+    opacity: 0.7;
   }
 
   /* ═══ 3D WEBGL STAGE ═══════════════════════════ */
@@ -106,7 +117,7 @@ tailwind.config = {
     top: 0; left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 12;
+    z-index: 15;
     pointer-events: none;
     overflow: hidden;
   }
@@ -114,7 +125,7 @@ tailwind.config = {
   /* ── Reveal Animations ──────────────────────── */
   .reveal {
     opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(18px);
     transition: opacity 0.85s cubic-bezier(.22,1,.36,1), transform 0.85s cubic-bezier(.22,1,.36,1);
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -127,101 +138,103 @@ tailwind.config = {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 50;
-    height: 72px;
+    height: 76px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 3.5rem;
-    background: rgba(5, 5, 5, 0.75);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0 4rem;
+    background: rgba(7, 9, 13, 0.75);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
   .nav-logo {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
-    letter-spacing: -0.03em;
-    color: #e6edf3;
+    letter-spacing: -0.04em;
+    color: #ffffff;
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
   }
   .nav-logo span { color: #00f0ff; }
-  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .nav-links { display: flex; gap: 2.8rem; align-items: center; }
   .nav-links a {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #8b949e;
+    color: #838e9d;
     text-decoration: none;
     transition: all 0.25s;
   }
   .nav-links a:hover {
-    color: #00f0ff;
-    text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
   }
 
-  /* ── CTA Buttons ────────────────────────────── */
-  .btn-preorder {
+  /* ── Sleek Pill-Shaped UI Buttons ──────────── */
+  .pill-btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    padding: 0.72rem 1.75rem;
+    gap: 0.55rem;
+    padding: 0.75rem 1.85rem;
     border-radius: 9999px;
-    background: #090e14;
-    border: 1px solid rgba(0, 240, 255, 0.55);
-    color: #00f0ff;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    background: #090e15;
+    border: 1px solid rgba(0, 240, 255, 0.45);
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     text-decoration: none;
-    box-shadow: 0 0 24px rgba(0, 240, 255, 0.22), inset 0 0 12px rgba(0, 240, 255, 0.08);
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.18), inset 0 0 12px rgba(0, 240, 255, 0.06);
     transition: all 0.3s cubic-bezier(.22,1,.36,1);
     cursor: pointer;
   }
-  .btn-preorder:hover {
+  .pill-btn-primary:hover {
     background: #00f0ff;
-    color: #050505;
-    box-shadow: 0 0 35px rgba(0, 240, 255, 0.65);
-    transform: translateY(-1px) scale(1.02);
+    color: #07090d;
+    box-shadow: 0 0 36px rgba(0, 240, 255, 0.55);
+    border-color: #00f0ff;
+    transform: translateY(-1px);
   }
 
-  .btn-ghost {
+  .pill-btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #8b949e;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #838e9d;
     text-decoration: none;
+    padding: 0.75rem 1.4rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(16, 20, 28, 0.4);
     transition: all 0.25s;
-    padding: 0.72rem 1rem;
   }
-  .btn-ghost:hover {
-    color: #00f0ff;
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-    transform: translateX(3px);
+  .pill-btn-ghost:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(16, 20, 28, 0.8);
   }
 
   /* ── Scroll Progress Line ───────────────────── */
   #scroll-progress {
     position: fixed;
     top: 0; left: 0;
-    height: 2px;
+    height: 1.5px;
     background: linear-gradient(90deg, #00f0ff, #7df9ff);
     z-index: 100;
     width: 0%;
-    box-shadow: 0 0 12px #00f0ff;
+    box-shadow: 0 0 10px #00f0ff;
   }
 
   /* ── Section Container ──────────────────────── */
@@ -231,51 +244,51 @@ tailwind.config = {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 6rem 3.5rem;
+    padding: 6rem 4rem;
     max-width: 1440px;
     margin: 0 auto;
   }
 
-  /* ── Glass Telemetry Cards ──────────────────── */
-  .glass-card {
-    background: rgba(14, 18, 25, 0.65);
+  /* ── Editorial Glass Cards ──────────────────── */
+  .editorial-card {
+    background: rgba(13, 17, 24, 0.65);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 20px;
-    padding: 1.4rem;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    padding: 1.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
   }
   .spec-row {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0.8rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
   .spec-row:last-child { border-bottom: none; }
 
   /* ── Finish Swatches ────────────────────────── */
   .finish-btn {
     padding: 0.85rem 0.95rem; border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    background: rgba(18, 22, 30, 0.6); cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(16, 20, 28, 0.6); cursor: pointer;
     display: flex; flex-direction: column; align-items: center;
-    gap: 0.5rem; transition: all 0.25s; color: #e6edf3;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 10px; font-weight: 600;
+    gap: 0.5rem; transition: all 0.25s; color: #f0f4f8;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 10px; font-weight: 500;
     letter-spacing: 0.08em; text-transform: uppercase;
   }
   .finish-btn:hover, .finish-btn.active {
     border-color: #00f0ff;
     background: rgba(0, 240, 255, 0.08);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    box-shadow: 0 0 22px rgba(0, 240, 255, 0.25);
   }
   .finish-swatch { width: 32px; height: 32px; border-radius: 9999px; }
 
   @media (max-width: 768px) {
-    nav { padding: 0 1.25rem; }
+    nav { padding: 0 1.5rem; }
     .nav-links { display: none; }
-    .section { padding: 5rem 1.25rem; }
-    #hud-simulation-overlay { display: none; }
+    .section { padding: 5rem 1.5rem; }
+    .foreground-dof-lens, .lens-metallic-bezel { display: none; }
   }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -285,76 +298,53 @@ tailwind.config = {
 <!-- Scroll Progress Bar -->
 <div id="scroll-progress"></div>
 
-<!-- ═══ CINEMATIC SPOTLIGHT MATTE VOID BACKGROUND ═══════ -->
-<div class="void-spotlight"></div>
-<div class="lens-flare-disc"></div>
-<div class="lens-flare-ring"></div>
-<div class="sim-grid-overlay"></div>
+<!-- ═══ CINEMATIC SLATE-GRAY VOID BACKGROUND & VOLUMETRIC GLOW ═══ -->
+<div class="slate-void-bg"></div>
+<div class="spotlight-glow"></div>
 
-<!-- ═══ ENGINEERING SIMULATION HUD OVERLAY ═══════════════ -->
-<div id="hud-simulation-overlay" class="fixed inset-0 pointer-events-none z-20 flex flex-col justify-between p-8 text-titanium-slate font-mono text-[10px] tracking-widest uppercase select-none opacity-80">
-  <!-- Top Corners HUD -->
-  <div class="flex justify-between items-start pt-16">
-    <div class="flex items-center gap-3">
-      <span class="inline-block w-2 h-2 bg-electric-blue shadow-[0_0_8px_#00f0ff] rounded-full animate-pulse"></span>
-      <span>SIMULATION: ZERO-G LEVITATION // ACTIVE</span>
-    </div>
-    <div class="flex items-center gap-4 text-right">
-      <span>LAT: 44.192°N &nbsp; ELEV: +1,240M</span>
-      <span class="text-electric-blue border border-electric-blue/30 px-2 py-0.5 rounded">0.00G</span>
-    </div>
-  </div>
+<!-- ═══ 1PX FAINT TECHNICAL RADAR GRIDLINES & CONCENTRIC CIRCLES ═══ -->
+<svg class="radar-canvas-overlay" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="radarFade" cx="63%" cy="46%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="90%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="radarMask">
+      <rect width="100%" height="100%" fill="url(#radarFade)"/>
+    </mask>
+  </defs>
+  <g mask="url(#radarMask)">
+    <!-- Thin concentric radar circles centered behind levitating bottle -->
+    <circle cx="63%" cy="46%" r="140" stroke="rgba(0, 240, 255, 0.08)" stroke-width="1" fill="none"/>
+    <circle cx="63%" cy="46%" r="240" stroke="rgba(255, 255, 255, 0.035)" stroke-width="1" stroke-dasharray="3 8" fill="none"/>
+    <circle cx="63%" cy="46%" r="350" stroke="rgba(0, 240, 255, 0.045)" stroke-width="1" fill="none"/>
+    <circle cx="63%" cy="46%" r="470" stroke="rgba(255, 255, 255, 0.025)" stroke-width="1" stroke-dasharray="2 12" fill="none"/>
+    <circle cx="63%" cy="46%" r="600" stroke="rgba(0, 240, 255, 0.02)" stroke-width="1" fill="none"/>
 
-  <!-- Bottom-Right Interactive Telemetry Overlay -->
-  <div class="self-end mb-2 flex flex-col items-end gap-2 pointer-events-auto">
-    <div class="glass-card p-3 flex flex-col gap-1.5 min-w-[200px] border-electric-blue/20">
-      <div class="flex justify-between items-center text-[9px] text-electric-blue font-bold tracking-wider">
-        <span>TELEMETRY HUD</span>
-        <span class="flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-electric-blue animate-ping"></span>
-          ONLINE
-        </span>
-      </div>
-      <div class="grid grid-cols-2 gap-2 text-[10px] pt-1">
-        <div>
-          <div class="text-[8px] text-titanium-slate">GRAV-FIELD</div>
-          <div class="text-electric-blue font-heading font-bold text-xs">0.00 G</div>
-        </div>
-        <div>
-          <div class="text-[8px] text-titanium-slate">UV-C EMISSION</div>
-          <div class="text-electric-glow font-heading font-bold text-xs">280 nm</div>
-        </div>
-        <div>
-          <div class="text-[8px] text-titanium-slate">CHASSIS CORE</div>
-          <div class="text-titanium-light font-heading font-bold text-xs">Ti-6Al-4V</div>
-        </div>
-        <div>
-          <div class="text-[8px] text-titanium-slate">ATMOSPHERE</div>
-          <div class="text-electric-blue font-heading font-bold text-xs">0.0001 Torr</div>
-        </div>
-      </div>
-      <div class="mt-1 pt-1 border-t border-white/5 flex items-center justify-between text-[8px] text-titanium-slate">
-        <span>SCROLL TO DECONSTRUCT</span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" class="text-electric-blue animate-bounce">
-          <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- Subtle 1px radar coordinate crosshairs -->
+    <line x1="63%" y1="6%" x2="63%" y2="86%" stroke="rgba(255, 255, 255, 0.025)" stroke-width="1"/>
+    <line x1="20%" y1="46%" x2="96%" y2="46%" stroke="rgba(255, 255, 255, 0.025)" stroke-width="1"/>
 
-<!-- ═══ 3D WEBGL STAGE (ANTI-GRAVITY PROPORTIONED BOTTLE) ═ -->
+    <!-- Technical alignment ticks & degree coordinates -->
+    <text x="63.5%" y="18%" fill="rgba(255, 255, 255, 0.15)" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="0.1em">000° // RADIAL GRID</text>
+    <text x="86%" y="45%" fill="rgba(0, 240, 255, 0.22)" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="0.1em">090° [ZERO-G]</text>
+    <text x="63.5%" y="76%" fill="rgba(255, 255, 255, 0.15)" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="0.1em">180° // LEVITATION</text>
+  </g>
+</svg>
+
+<!-- ═══ FOREGROUND HEAVILY BLURRED BLACK CAMERA LENS (DOF) ═══ -->
+<div class="foreground-dof-lens"></div>
+<div class="lens-metallic-bezel"></div>
+
+<!-- ═══ 3D WEBGL STAGE (MATTE BLACK TITANIUM BOTTLE) ═════ -->
 <div id="three-stage">
   <div id="threejs-canvas-wrap" style="width:100%;height:100%;"></div>
 </div>
 
-<!-- ═══ TOP NAVIGATION BAR ═══════════════════════════════ -->
+<!-- ═══ MINIMALIST FIGMA EDITORIAL NAVIGATION ════════════ -->
 <nav>
   <a class="nav-logo" href="#">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="text-electric-blue">
-      <path d="M12 2L4 6V18L12 22L20 18V6L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="12" cy="12" r="3" fill="#00f0ff"/>
-    </svg>
     sip<span>2O</span>
   </a>
   <div class="nav-links">
@@ -363,57 +353,52 @@ tailwind.config = {
     <a href="#purity">Hydration OS</a>
     <a href="#configure">Configurator</a>
   </div>
-  <a class="btn-preorder !py-2 !px-5 !text-[11px]" href="#configure">Pre-Order Now</a>
+  <a class="pill-btn-primary !py-2 !px-5 !text-[11px]" href="#configure">Pre-Order</a>
 </nav>
 
-<!-- ═══ SECTION 1: HERO (GENESIS // ANTI-GRAVITY VOID) ═══ -->
+<!-- ═══ SECTION 1: HERO (SWISS EDITORIAL LAYOUT) ═════════ -->
 <section id="hero" class="section">
   <div style="max-width:560px;" class="relative z-30">
-    <!-- Top Glowing Label -->
-    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-void-charcoal/90 border border-electric-blue/40 text-electric-blue font-mono text-[11px] font-semibold tracking-wider uppercase mb-6 shadow-[0_0_20px_rgba(0,240,255,0.25)] reveal">
-      <span>🚀</span> TI-6AL-4V AEROSPACE TITANIUM
+    <!-- Minimalist Label -->
+    <div class="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.18em] text-[#838e9d] uppercase mb-6 reveal">
+      <span class="w-1.5 h-1.5 rounded-full bg-electric-blue shadow-[0_0_8px_#00f0ff]"></span>
+      AEROSPACE GRADE TITANIUM &nbsp;·&nbsp; Ti-6Al-4V
     </div>
 
-    <!-- Main Bold Heading -->
-    <h1 class="reveal reveal-delay-1 font-heading text-[48px] sm:text-[64px] lg:text-[72px] font-bold leading-[1.05] tracking-[-0.03em] text-titanium-light mb-6">
+    <!-- Left-Aligned High-Contrast Swiss Typography -->
+    <h1 class="reveal reveal-delay-1 font-heading text-[52px] sm:text-[68px] lg:text-[76px] font-bold tracking-[-0.038em] text-white leading-[1.05] mb-6">
       Pure Water.<br>
       Engineered<br>
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-electric-blue via-electric-glow to-white drop-shadow-[0_0_35px_rgba(0,240,255,0.7)]">Perfectly.</span>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-electric-soft drop-shadow-[0_0_24px_rgba(0,240,255,0.45)]">Perfectly.</span>
     </h1>
 
-    <!-- Body Text -->
-    <p class="reveal reveal-delay-2 font-body text-[15px] sm:text-[16px] text-titanium-slate leading-[1.68] max-w-[450px] mb-8 font-normal">
-      Autonomous fluid architecture forged from aerospace-grade titanium. 36-hour cryogenic vacuum insulation with integrated 280nm optical UV-C self-purification.
+    <!-- Editorial Description (Zero Clutter) -->
+    <p class="reveal reveal-delay-2 font-body text-[15px] sm:text-[16px] text-[#939fab] leading-[1.7] max-w-[430px] mb-8 font-normal">
+      Levitating at the frontier of precision hydrology. Cryogenic vacuum insulation engineered inside a seamless matte black aerospace titanium vessel.
     </p>
 
-    <!-- Two Buttons -->
-    <div class="reveal reveal-delay-3 flex items-center gap-4 flex-wrap mb-12">
-      <a class="btn-preorder" href="#configure">
+    <!-- Sleek Thin Pill-Shaped UI Buttons -->
+    <div class="reveal reveal-delay-3 flex items-center gap-3.5 flex-wrap mb-14">
+      <a class="pill-btn-primary" href="#configure">
         <span>Pre-Order Edition — $349</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
-      <a class="btn-ghost" href="#performance">
+      <a class="pill-btn-ghost" href="#performance">
         Deconstruct Anatomy ↓
       </a>
     </div>
 
-    <!-- Bottom Left Data Callouts -->
-    <div class="reveal reveal-delay-3 flex items-center gap-6 pt-2 border-t border-white/5">
-      <div>
-        <div class="font-heading font-bold text-xl sm:text-2xl text-electric-blue">36h</div>
-        <div class="font-mono text-[10px] tracking-wider text-titanium-slate uppercase mt-0.5">Sub-Zero Retention</div>
+    <!-- Minimalist Footer Metrics: 36h and 99.9% -->
+    <div class="reveal reveal-delay-3 flex items-baseline gap-10 pt-4 border-t border-white/5 font-mono">
+      <div class="flex items-baseline gap-2.5">
+        <span class="font-heading font-bold text-3xl sm:text-4xl text-white tracking-tight">36h</span>
+        <span class="text-[10px] tracking-[0.14em] text-[#838e9d] uppercase">Sub-Zero Retention</span>
       </div>
-      <div class="w-px h-8 bg-white/10"></div>
-      <div>
-        <div class="font-heading font-bold text-xl sm:text-2xl text-electric-glow">99.9%</div>
-        <div class="font-mono text-[10px] tracking-wider text-titanium-slate uppercase mt-0.5">Pathogen Kill</div>
-      </div>
-      <div class="w-px h-8 bg-white/10"></div>
-      <div>
-        <div class="font-heading font-bold text-xl sm:text-2xl text-titanium-light">0.00g</div>
-        <div class="font-mono text-[10px] tracking-wider text-titanium-slate uppercase mt-0.5">Microplastic Leaching</div>
+      <div class="flex items-baseline gap-2.5">
+        <span class="font-heading font-bold text-3xl sm:text-4xl text-electric-blue tracking-tight">99.9%</span>
+        <span class="text-[10px] tracking-[0.14em] text-[#838e9d] uppercase">Pathogen Elimination</span>
       </div>
     </div>
   </div>
@@ -421,196 +406,196 @@ tailwind.config = {
 
 <!-- ═══ SECTION 2: CRYO-CORE // DECONSTRUCTED ANATOMY ════ -->
 <section id="performance" class="section" style="justify-content:flex-end;">
-  <div style="max-width:480px;width:100%;" class="relative z-30">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-void-charcoal border border-copper/40 text-copper font-mono text-[10px] font-semibold tracking-wider uppercase mb-4 reveal">
-      <span class="w-1.5 h-1.5 rounded-full bg-copper shadow-[0_0_8px_#d97438]"></span>
-      CHAPTER 02 // THERMAL METROLOGY
+  <div style="max-width:470px;width:100%;" class="relative z-30">
+    <div class="font-mono text-[10px] tracking-[0.18em] text-[#838e9d] uppercase mb-3 reveal">
+      CHAPTER 02 &nbsp;·&nbsp; THERMAL ANATOMY
     </div>
 
-    <h2 class="reveal reveal-delay-1 font-heading text-3xl sm:text-5xl font-bold tracking-tight text-titanium-light leading-tight mb-4">
+    <h2 class="reveal reveal-delay-1 font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
       Cryo-Shield™<br>
-      <span class="text-copper">Vacuum Interstice</span>
+      <span class="text-electric-blue">Vacuum Core</span>
     </h2>
 
-    <p class="reveal reveal-delay-2 text-titanium-slate text-sm leading-relaxed mb-6">
-      Engineered through proprietary triple-stage annealing in zero-atmosphere chambers. The radiant copper barrier deflects infrared photons, maintaining absolute cryogenic containment.
+    <p class="reveal reveal-delay-2 text-[#939fab] text-sm leading-relaxed mb-6 font-normal">
+      0.0001 Torr deep vacuum interstice layered with copper vapor deposition. Reflects thermal radiation in extreme conditions with zero kinetic heat displacement.
     </p>
 
     <!-- Exploded Anatomy Spec Card -->
-    <div class="glass-card reveal reveal-delay-2 mb-6">
+    <div class="editorial-card reveal reveal-delay-2 mb-6">
       <div class="spec-row">
         <div class="flex items-center gap-2.5">
-          <span class="w-2 h-2 rounded-full bg-titanium-slate"></span>
-          <span class="font-heading text-xs font-semibold uppercase tracking-wider text-titanium-light">Ti-6Al-4V Outer Fuselage</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+          <span class="font-heading text-xs font-semibold text-white">Matte Black Titanium Shell</span>
         </div>
-        <span class="font-mono text-xs text-electric-blue">0.4mm Laser Shell</span>
+        <span class="font-mono text-[11px] text-[#838e9d]">0.4mm Alpha-Beta</span>
       </div>
       <div class="spec-row">
         <div class="flex items-center gap-2.5">
-          <span class="w-2 h-2 rounded-full bg-copper"></span>
-          <span class="font-heading text-xs font-semibold uppercase tracking-wider text-titanium-light">Radiant Copper Thermal Core</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-[#d97438]"></span>
+          <span class="font-heading text-xs font-semibold text-white">Radiant Copper Deflector</span>
         </div>
-        <span class="font-mono text-xs text-copper">12µ Vapor Barrier</span>
+        <span class="font-mono text-[11px] text-[#d97438]">12µ Vapor Barrier</span>
       </div>
       <div class="spec-row">
         <div class="flex items-center gap-2.5">
-          <span class="w-2 h-2 rounded-full bg-titanium-light"></span>
-          <span class="font-heading text-xs font-semibold uppercase tracking-wider text-titanium-light">0.0001 Torr Vacuum Void</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-electric-blue"></span>
+          <span class="font-heading text-xs font-semibold text-white">Cryogenic Vacuum Void</span>
         </div>
-        <span class="font-mono text-xs text-electric-glow">Zero Conduction</span>
+        <span class="font-mono text-[11px] text-electric-blue">0.0001 Torr</span>
       </div>
       <div class="spec-row">
         <div class="flex items-center gap-2.5">
-          <span class="w-2 h-2 rounded-full bg-electric-blue"></span>
-          <span class="font-heading text-xs font-semibold uppercase tracking-wider text-titanium-light">Fluorosilicone Seal Stack</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="font-heading text-xs font-semibold text-white">Fluorosilicone Seal Stack</span>
         </div>
-        <span class="font-mono text-xs text-electric-blue">Hermetic Lock</span>
+        <span class="font-mono text-[11px] text-[#838e9d]">Zero Leaching</span>
       </div>
     </div>
 
     <!-- Thermal Slider Simulation -->
-    <div class="glass-card reveal reveal-delay-3 p-4">
+    <div class="editorial-card reveal reveal-delay-3 p-4">
       <div class="flex justify-between items-center mb-2">
-        <span class="font-mono text-[10px] uppercase tracking-wider text-titanium-slate">Thermal Lock Simulator</span>
+        <span class="font-mono text-[10px] tracking-wider text-[#838e9d] uppercase">Thermal Lock Simulation</span>
         <span class="font-heading text-base font-bold text-electric-blue" id="tempValue">4°C / 39°F</span>
       </div>
-      <input class="w-full accent-electric-blue bg-void-charcoal cursor-pointer h-1.5 rounded-lg" id="tempSlider" max="95" min="2" type="range" value="4"/>
-      <div class="flex justify-between text-titanium-slate font-mono text-[9px] uppercase tracking-wider pt-2">
-        <span>Glacial (2°C)</span>
-        <span class="text-electric-blue font-bold" id="retentionStatus">36.0h Sub-Zero Locked</span>
-        <span>Boiling (95°C)</span>
+      <input class="w-full accent-electric-blue bg-void-charcoal cursor-pointer h-1 rounded-lg" id="tempSlider" max="95" min="2" type="range" value="4"/>
+      <div class="flex justify-between text-[#838e9d] font-mono text-[9px] uppercase tracking-wider pt-2">
+        <span>Glacial 2°C</span>
+        <span class="text-electric-blue font-semibold" id="retentionStatus">36.0h Sub-Zero Locked</span>
+        <span>Boiling 95°C</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SECTION 3: PURITY // HYDRATION OS & UV-C ═════════ -->
+<!-- ═══ SECTION 3: PURITY // 280NM PHOTONIC STERILIZATION ═ -->
 <section id="purity" class="section" style="justify-content:flex-start;">
-  <div style="max-width:480px;width:100%;" class="relative z-30">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-void-charcoal border border-electric-blue/40 text-electric-blue font-mono text-[10px] font-semibold tracking-wider uppercase mb-4 reveal">
-      <span class="w-1.5 h-1.5 rounded-full bg-electric-blue shadow-[0_0_8px_#00f0ff]"></span>
-      CHAPTER 03 // INTELLIGENT METROLOGY
+  <div style="max-width:470px;width:100%;" class="relative z-30">
+    <div class="font-mono text-[10px] tracking-[0.18em] text-[#838e9d] uppercase mb-3 reveal">
+      CHAPTER 03 &nbsp;·&nbsp; INTELLIGENT METROLOGY
     </div>
 
-    <h2 class="reveal reveal-delay-1 font-heading text-3xl sm:text-5xl font-bold tracking-tight text-titanium-light leading-tight mb-4">
+    <h2 class="reveal reveal-delay-1 font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight mb-4">
       280nm Photonic<br>
-      <span class="text-electric-glow">Self-Purification</span>
+      <span class="text-electric-blue">Purification</span>
     </h2>
 
-    <p class="reveal reveal-delay-2 text-titanium-slate text-sm leading-relaxed mb-6">
-      Every droplet is monitored via electrolytic capacitance rings. The integrated 280nm optical UV-C emitter sweeps the entire titanium hull autonomously every 120 minutes.
+    <p class="reveal reveal-delay-2 text-[#939fab] text-sm leading-relaxed mb-6 font-normal">
+      An integrated optical UV-C diode sweeps the interior chamber autonomously every 120 minutes. Neutralizes 99.9% of biological contaminants with zero chemical intervention.
     </p>
 
     <!-- UV-C Sanitation Card -->
-    <div class="glass-card reveal reveal-delay-2 mb-6">
+    <div class="editorial-card reveal reveal-delay-2 mb-6">
       <div class="flex items-center justify-between mb-3">
-        <span class="font-heading text-xs font-semibold uppercase tracking-wider text-titanium-slate">Optical Sterilization</span>
-        <span class="font-mono text-[10px] text-electric-blue bg-electric-blue/10 px-2 py-0.5 rounded-full border border-electric-blue/30">Active</span>
+        <span class="font-heading text-xs font-semibold text-[#838e9d] uppercase tracking-wider">Photonic State</span>
+        <span class="font-mono text-[9px] text-electric-blue bg-electric-blue/10 px-2 py-0.5 rounded-full border border-electric-blue/30">Autonomous Active</span>
       </div>
-      <div class="font-heading text-4xl font-bold text-electric-blue mb-1">99.99% Pure</div>
-      <div class="font-mono text-[10px] text-titanium-slate uppercase tracking-wider mb-4">E. Coli, Salmonella & Biofilm Neutralized</div>
+      <div class="font-heading text-4xl font-bold text-white mb-1">99.9% Pure</div>
+      <div class="font-mono text-[10px] text-[#838e9d] uppercase tracking-wider mb-4">Pathogen & Biofilm Elimination</div>
       
       <!-- Pulsing Laser Cycle Track -->
-      <div class="w-full h-1 bg-void-charcoal rounded-full overflow-hidden mb-2">
-        <div class="h-full w-4/5 bg-gradient-to-r from-electric-blue to-electric-glow shadow-[0_0_12px_#00f0ff] animate-pulse"></div>
+      <div class="w-full h-1 bg-white/5 rounded-full overflow-hidden mb-2">
+        <div class="h-full w-4/5 bg-gradient-to-r from-electric-blue to-electric-soft shadow-[0_0_12px_#00f0ff]"></div>
       </div>
-      <div class="flex justify-between font-mono text-[9px] text-titanium-slate uppercase">
-        <span>Cycle: 60s Optical Pulse</span>
+      <div class="flex justify-between font-mono text-[9px] text-[#838e9d] uppercase">
+        <span>60s Optical Pulse</span>
         <span>Next Sweep: 42 Min</span>
       </div>
     </div>
 
-    <!-- Health Telemetry Integrations -->
+    <!-- Telemetry Integrations -->
     <div class="reveal reveal-delay-3 flex gap-2 flex-wrap font-mono text-[10px]">
-      <span class="px-3 py-1 rounded-full bg-void-charcoal border border-white/5 text-titanium-light">Bluetooth 5.4 LE</span>
-      <span class="px-3 py-1 rounded-full bg-void-charcoal border border-white/5 text-titanium-light">Apple HealthKit</span>
-      <span class="px-3 py-1 rounded-full bg-void-charcoal border border-white/5 text-titanium-light">Garmin Connect</span>
-      <span class="px-3 py-1 rounded-full bg-void-charcoal border border-white/5 text-titanium-light">Whoop 4.0 API</span>
+      <span class="px-3 py-1 rounded-full bg-slate-card border border-white/5 text-[#838e9d]">Bluetooth 5.4 LE</span>
+      <span class="px-3 py-1 rounded-full bg-slate-card border border-white/5 text-[#838e9d]">Apple HealthKit</span>
+      <span class="px-3 py-1 rounded-full bg-slate-card border border-white/5 text-[#838e9d]">Garmin Connect</span>
     </div>
   </div>
 </section>
 
-<!-- ═══ SECTION 4: CONFIGURE // BESPOKE COMMISSIONS ══════ -->
+<!-- ═══ SECTION 4: CONFIGURE // FIGMA BESPOKE COMMISSION ═ -->
 <section id="configure" class="section" style="justify-content:center;flex-direction:column;align-items:center;text-align:center;">
-  <div style="max-width:580px;width:100%;" class="relative z-30">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-void-charcoal border border-electric-blue/40 text-electric-blue font-mono text-[10px] font-semibold tracking-wider uppercase mb-4 reveal">
-      <span class="w-1.5 h-1.5 rounded-full bg-electric-blue shadow-[0_0_8px_#00f0ff]"></span>
-      CHAPTER 04 // BESPOKE COMMISSIONS
+  <div style="max-width:560px;width:100%;" class="relative z-30">
+    <div class="font-mono text-[10px] tracking-[0.18em] text-[#838e9d] uppercase mb-3 reveal">
+      CHAPTER 04 &nbsp;·&nbsp; BESPOKE EDITIONS
     </div>
 
-    <h2 class="reveal reveal-delay-1 font-heading text-3xl sm:text-5xl font-bold tracking-tight text-titanium-light leading-tight mb-3">
+    <h2 class="reveal reveal-delay-1 font-heading text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight mb-3">
       Configure Your Vessel
     </h2>
 
-    <p class="reveal reveal-delay-2 text-titanium-slate text-sm leading-relaxed mb-8">
-      Select your aerospace finish. The 3D anti-gravity vessel renders in real-time.
+    <p class="reveal reveal-delay-2 text-[#939fab] text-sm leading-relaxed mb-7 font-normal">
+      Bespoke anodized ceramic finishes. Real-time 3D simulation.
     </p>
 
     <!-- 1. Color Finish Selector -->
     <div class="reveal reveal-delay-2 grid grid-cols-4 gap-3 mb-6">
-      <button class="finish-btn active" data-color="#141820" onclick="setVesselFinish(this, '#141820')">
-        <span class="finish-swatch" style="background:linear-gradient(135deg,#0a0d12,#1f2530);box-shadow:0 0 16px rgba(0,240,255,0.4);"></span>
-        Titanium Void
+      <button class="finish-btn active" data-color="#0c0e12" onclick="setVesselFinish(this, '#0c0e12')">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#060709,#151921);box-shadow:0 0 16px rgba(0,240,255,0.4);"></span>
+        Matte Black
       </button>
       <button class="finish-btn" data-color="#7a8878" onclick="setVesselFinish(this, '#7a8878')">
         <span class="finish-swatch" style="background:linear-gradient(135deg,#677365,#8c988a);"></span>
         Sage Edition
       </button>
       <button class="finish-btn" data-color="#00f0ff" onclick="setVesselFinish(this, '#00f0ff')">
-        <span class="finish-swatch" style="background:linear-gradient(135deg,#00b8c4,#00f0ff);box-shadow:0 0 16px rgba(0,240,255,0.6);"></span>
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#00a8b4,#00f0ff);box-shadow:0 0 16px rgba(0,240,255,0.6);"></span>
         Cyber Cyan
       </button>
-      <button class="finish-btn" data-color="#909aa3" onclick="setVesselFinish(this, '#909aa3')">
-        <span class="finish-swatch" style="background:linear-gradient(135deg,#737c85,#b8c2cb);"></span>
+      <button class="finish-btn" data-color="#8b959e" onclick="setVesselFinish(this, '#8b959e')">
+        <span class="finish-swatch" style="background:linear-gradient(135deg,#6b747d,#b2bcc5);"></span>
         Raw Titanium
       </button>
     </div>
 
     <!-- 2. Capacity Specification -->
     <div class="reveal reveal-delay-3 grid grid-cols-2 gap-3 mb-6">
-      <button id="vol-650" onclick="setVesselVolume(650)" style="padding:1.1rem 1rem;border-radius:18px;border:1px solid #00f0ff;background:rgba(0,240,255,0.08);cursor:pointer;text-align:left;transition:all 0.25s;">
-        <div class="font-heading text-xl font-bold text-titanium-light">650 ml</div>
-        <div class="font-mono text-[9px] uppercase tracking-wider text-electric-blue mt-1">Standard EDC Spec — $349</div>
+      <button id="vol-650" onclick="setVesselVolume(650)" style="padding:1rem 1rem;border-radius:18px;border:1px solid #00f0ff;background:rgba(0,240,255,0.08);cursor:pointer;text-align:left;transition:all 0.25s;">
+        <div class="font-heading text-lg font-bold text-white">650 ml</div>
+        <div class="font-mono text-[9px] uppercase tracking-wider text-electric-blue mt-0.5">EDC Specification — $349</div>
       </button>
-      <button id="vol-950" onclick="setVesselVolume(950)" style="padding:1.1rem 1rem;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(18,22,30,0.6);cursor:pointer;text-align:left;transition:all 0.25s;">
-        <div class="font-heading text-xl font-bold text-titanium-light">950 ml</div>
-        <div class="font-mono text-[9px] uppercase tracking-wider text-titanium-slate mt-1">Expedition Spec — $364</div>
+      <button id="vol-950" onclick="setVesselVolume(950)" style="padding:1rem 1rem;border-radius:18px;border:1px solid rgba(255,255,255,0.06);background:rgba(16,20,28,0.5);cursor:pointer;text-align:left;transition:all 0.25s;">
+        <div class="font-heading text-lg font-bold text-white">950 ml</div>
+        <div class="font-mono text-[9px] uppercase tracking-wider text-[#838e9d] mt-0.5">Expedition Specification — $364</div>
       </button>
     </div>
 
     <!-- 3. Laser Engraving Input -->
-    <div class="glass-card reveal reveal-delay-3 mb-6 p-4 text-left">
+    <div class="editorial-card reveal reveal-delay-3 mb-6 p-4 text-left">
       <div class="flex justify-between items-center mb-2">
-        <label class="font-mono text-[10px] uppercase tracking-wider text-titanium-slate">Laser Etched Call-Sign</label>
-        <span class="font-mono text-[9px] text-electric-blue uppercase">Zero-G Engraving Free</span>
+        <label class="font-mono text-[10px] uppercase tracking-wider text-[#838e9d]">Laser Monogram</label>
+        <span class="font-mono text-[9px] text-electric-blue uppercase">Zero-G Engraving Complimentary</span>
       </div>
-      <input class="w-full bg-void px-4 py-2.5 rounded-xl text-titanium-light font-heading text-sm uppercase tracking-wider border border-white/10 focus:outline-none focus:border-electric-blue transition-colors" id="laserInput" maxlength="12" placeholder="CALLSIGN (MAX 12)" type="text" value="SIP2O"/>
+      <input class="w-full bg-[#080a0f] px-4 py-2.5 rounded-xl text-white font-heading text-sm uppercase tracking-wider border border-white/5 focus:outline-none focus:border-electric-blue transition-colors" id="laserInput" maxlength="12" placeholder="CALLSIGN (MAX 12)" type="text" value="SIP2O"/>
     </div>
 
     <!-- Pre-Order CTA Button -->
-    <button class="btn-preorder reveal reveal-delay-3 w-full !py-4 !text-sm" type="button">
+    <button class="pill-btn-primary reveal reveal-delay-3 w-full !py-3.5 !text-xs" type="button">
       Reserve Your Edition — Guaranteed Dispatch →
     </button>
-    <div class="reveal mt-3 font-mono text-[10px] tracking-wider text-titanium-slate uppercase">
-      100-Year Indestructible Hull Warranty &nbsp;·&nbsp; 30-Day Risk-Free Field Test
+    <div class="reveal mt-3 font-mono text-[9px] tracking-wider text-[#838e9d] uppercase">
+      100-Year Indestructible Hull Warranty &nbsp;·&nbsp; 30-Day Field Test Guarantee
     </div>
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══════════════════════════════════════════ -->
-<footer class="relative z-25 py-8 px-14 border-t border-white/5 flex items-center justify-between flex-wrap gap-4 font-mono text-[10px] text-titanium-slate uppercase tracking-wider">
-  <div class="font-heading font-bold text-base text-titanium-light">
+<!-- ═══ MINIMALIST EDITORIAL FOOTER ══════════════════════ -->
+<footer class="relative z-25 py-8 px-16 border-t border-white/5 flex items-center justify-between flex-wrap gap-4 font-mono text-[10px] text-[#838e9d] uppercase tracking-wider">
+  <div class="font-heading font-bold text-base text-white">
     sip<span class="text-electric-blue">2O</span>
   </div>
-  <div>© 2026 sip2O Aerospace Hydrology. All rights reserved.</div>
-  <div>ZERO-G FLUID PLATFORM</div>
+  <div>© 2026 sip2O Aerospace Hydrology. Zero-G Platform.</div>
+  <div class="flex items-center gap-4">
+    <span>LAT: 44.192°N</span>
+    <span class="text-electric-blue">0.00G</span>
+  </div>
 </footer>
 
 <!-- ═══════════════════════════════════════════════════════
-     THREE.JS ANTI-GRAVITY SIMULATION ENGINE
-     - Balanced, contained viewport scale (Never cropped)
-     - Dynamic responsive FOV and camera distance
-     - Deconstructed exploded core cleanly confined
+     THREE.JS MATTE BLACK TITANIUM ZERO-G ENGINE
+     - Matte Black Titanium Finish
+     - Perfectly spherical suspended water droplets
+     - Symmetrical contained scale & zero clipping
+     - Dynamic responsive FOV
      ═══════════════════════════════════════════════════════ -->
 <script>
 (function() {
@@ -621,8 +606,8 @@ tailwind.config = {
   const width = container.clientWidth || window.innerWidth;
   const height = container.clientHeight || window.innerHeight;
   
-  // Clean focal length & camera distance: perfectly frames entire bottle
-  const camera = new THREE.PerspectiveCamera(36, width / height, 0.1, 1000);
+  // Clean focal length & camera distance
+  const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1000);
   camera.position.set(0, 0, 10.5);
   camera.lookAt(0, 0, 0);
 
@@ -630,18 +615,20 @@ tailwind.config = {
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.25;
+  renderer.toneMappingExposure = 1.35;
   container.appendChild(renderer.domElement);
 
-  // ── Moody Volumetric & Specular Lights ─────────────────
-  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+  // ── Soft Volumetric Lights ─────────────────────────────
+  scene.add(new THREE.AmbientLight(0xffffff, 0.75));
 
-  const spotLight = new THREE.SpotLight(0x7df9ff, 4.2);
+  // Volumetric spotlight directly illuminating the matte bottle
+  const spotLight = new THREE.SpotLight(0x7df9ff, 4.5);
   spotLight.position.set(4, 8, 6);
   spotLight.angle = Math.PI / 4.5;
   spotLight.penumbra = 0.85;
   scene.add(spotLight);
 
+  // Rim back-light for sharp aerospace titanium silhouette
   const rimLight = new THREE.DirectionalLight(0x00f0ff, 3.2);
   rimLight.position.set(-6, 3, -5);
   scene.add(rimLight);
@@ -650,26 +637,26 @@ tailwind.config = {
   copperFill.position.set(-3, -2, 3);
   scene.add(copperFill);
 
-  // ── Canvas Texture: Dark High-End Metallic Titanium ───
-  function createTitaniumTexture(baseColorHex, text) {
+  // ── Canvas Texture: Matte Black Titanium with Laser Typography ──
+  function createMatteBlackTexture(baseColorHex, text) {
     const canvas = document.createElement('canvas');
     canvas.width = 1024;
     canvas.height = 1024;
     const ctx = canvas.getContext('2d');
 
-    // Base dark titanium matte ground
+    // Deep matte black titanium base
     ctx.fillStyle = baseColorHex;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Micro-anodized horizontal grain
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.025)';
+    // Subtle micro-anodized horizontal grain
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.022)';
     for (let i = 0; i < 280; i++) {
       ctx.fillRect(0, Math.random() * 1024, 1024, Math.random() * 2);
     }
 
-    // Topographic laser contour lines
-    ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
-    ctx.lineWidth = 2.5;
+    // Faint laser contour lines on lower third
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+    ctx.lineWidth = 2.0;
     ctx.lineCap = 'round';
 
     function drawContour(yBase, amp, freq, offset) {
@@ -682,24 +669,11 @@ tailwind.config = {
       ctx.stroke();
     }
 
-    drawContour(750, 28, 0.012, 0);
-    drawContour(800, 38, 0.010, 90);
-    drawContour(850, 32, 0.013, 170);
-    drawContour(900, 22, 0.009, 250);
+    drawContour(760, 26, 0.012, 0);
+    drawContour(810, 36, 0.010, 90);
+    drawContour(860, 30, 0.013, 170);
 
-    // Surface wireframe coordinates
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-    ctx.lineWidth = 1.2;
-    for (let x = 80; x < 940; x += 100) {
-      ctx.beginPath();
-      ctx.moveTo(x, 720);
-      ctx.lineTo(x + 40, 830);
-      ctx.lineTo(x - 40, 830);
-      ctx.closePath();
-      ctx.stroke();
-    }
-
-    // Bold vertical branding
+    // Swiss Minimalist Vertical Typography: "sip2O"
     ctx.save();
     ctx.translate(512, 430);
     ctx.rotate(-Math.PI / 2);
@@ -707,8 +681,8 @@ tailwind.config = {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillStyle = '#ffffff';
-    ctx.shadowColor = 'rgba(0, 240, 255, 0.6)';
-    ctx.shadowBlur = 16;
+    ctx.shadowColor = 'rgba(0, 240, 255, 0.5)';
+    ctx.shadowBlur = 14;
     ctx.fillText(text || 'sip2O', 0, 0);
     ctx.restore();
 
@@ -718,14 +692,14 @@ tailwind.config = {
     return tex;
   }
 
-  // ── Materials ──────────────────────────────────────────
-  let titaniumTex = createTitaniumTexture('#141820', 'sip2O');
+  // ── Materials: Matte Black Titanium Finish ─────────────
+  let matteTex = createMatteBlackTexture('#0c0e12', 'sip2O');
 
-  const titaniumChassisMat = new THREE.MeshStandardMaterial({
-    map: titaniumTex,
+  const matteBlackTitaniumMat = new THREE.MeshStandardMaterial({
+    map: matteTex,
     color: 0xffffff,
-    metalness: 0.85,
-    roughness: 0.28,
+    metalness: 0.88,
+    roughness: 0.32,
   });
 
   const brushedSilverSpoutMat = new THREE.MeshStandardMaterial({
@@ -753,12 +727,12 @@ tailwind.config = {
   });
 
   const siliconeSealMat = new THREE.MeshStandardMaterial({
-    color: 0x151c24,
+    color: 0x12161e,
     metalness: 0.1,
     roughness: 0.8
   });
 
-  // ── Build Suspended Anti-Gravity Bottle (Scaled to fit viewport) ──
+  // ── Build Levitating Matte Black Titanium Bottle ───────
   const bottleGroup = new THREE.Group();
 
   // Tier 1: Outer Fuselage Shell
@@ -766,24 +740,24 @@ tailwind.config = {
   
   // Chamfered base puck
   const basePuckGeo = new THREE.CylinderGeometry(0.92, 0.86, 0.25, 56);
-  const basePuckMesh = new THREE.Mesh(basePuckGeo, titaniumChassisMat);
+  const basePuckMesh = new THREE.Mesh(basePuckGeo, matteBlackTitaniumMat);
   basePuckMesh.position.y = -2.1;
   chassisGroup.add(basePuckMesh);
 
-  // Main Cylinder
+  // Main Body Cylinder
   const bodyGeo = new THREE.CylinderGeometry(0.95, 0.92, 3.6, 56);
-  const bodyMesh = new THREE.Mesh(bodyGeo, titaniumChassisMat);
+  const bodyMesh = new THREE.Mesh(bodyGeo, matteBlackTitaniumMat);
   bodyMesh.position.y = -0.2;
   chassisGroup.add(bodyMesh);
 
   // Ergonomic Shoulder
   const shoulderGeo = new THREE.CylinderGeometry(0.72, 0.95, 0.85, 56);
-  const shoulderMesh = new THREE.Mesh(shoulderGeo, titaniumChassisMat);
+  const shoulderMesh = new THREE.Mesh(shoulderGeo, matteBlackTitaniumMat);
   shoulderMesh.position.y = 1.95;
   chassisGroup.add(shoulderMesh);
   bottleGroup.add(chassisGroup);
 
-  // Tier 2: Radiant Copper Thermal Core (Nests cleanly inside when assembled)
+  // Tier 2: Radiant Copper Thermal Core (Nests cleanly inside)
   const copperGroup = new THREE.Group();
   const copperGeo = new THREE.CylinderGeometry(0.82, 0.82, 3.4, 48);
   const copperMesh = new THREE.Mesh(copperGeo, moltenCopperMat);
@@ -791,7 +765,7 @@ tailwind.config = {
   copperGroup.add(copperMesh);
   bottleGroup.add(copperGroup);
 
-  // Tier 3: 316L Stainless Steel Vacuum Wall (Nests inside copper core)
+  // Tier 3: 316L Stainless Steel Vacuum Wall
   const steelGroup = new THREE.Group();
   const steelGeo = new THREE.CylinderGeometry(0.70, 0.70, 3.5, 48);
   const steelMesh = new THREE.Mesh(steelGeo, vacuumStainlessMat);
@@ -815,7 +789,7 @@ tailwind.config = {
   gasketMesh.position.y = 2.68;
   capStackGroup.add(gasketMesh);
 
-  // 280nm UV-C Glowing Light Band
+  // Subtle 280nm UV-C Glowing Light Band near top
   const uvcBandGeo = new THREE.TorusGeometry(0.62, 0.042, 16, 64);
   uvcBandGeo.rotateX(Math.PI / 2);
   const uvcBandMesh = new THREE.Mesh(uvcBandGeo, uvcGlowMat);
@@ -844,73 +818,73 @@ tailwind.config = {
 
   bottleGroup.add(capStackGroup);
 
-  // ── Floating Weightless Water Droplets in Zero-G ───────
-  const dropletCount = 65;
-  const dropletGeo = new THREE.SphereGeometry(0.042, 16, 16);
+  // ── Perfectly Crisp Spherical Floating Water Droplets ─
+  const dropletCount = 70;
+  const dropletGeo = new THREE.SphereGeometry(0.042, 24, 24); // smooth spherical
   const dropletMat = new THREE.MeshPhysicalMaterial({
     color: 0x7df9ff,
     emissive: 0x00f0ff,
-    emissiveIntensity: 0.3,
-    roughness: 0.1,
-    transmission: 0.85,
+    emissiveIntensity: 0.35,
+    roughness: 0.05,
+    transmission: 0.90,
     ior: 1.333,
     transparent: true,
-    opacity: 0.82
+    opacity: 0.85,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.05
   });
 
   const droplets = [];
   for (let i = 0; i < dropletCount; i++) {
     const d = new THREE.Mesh(dropletGeo, dropletMat);
     const angle = Math.random() * Math.PI * 2;
-    const radius = 1.3 + Math.random() * 1.5;
+    const radius = 1.3 + Math.random() * 1.6;
     const y = (Math.random() - 0.5) * 5.2;
     d.position.set(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
     d.userData = {
       angle,
       radius,
-      speed: 0.004 + Math.random() * 0.01,
+      speed: 0.0035 + Math.random() * 0.009,
       yBase: y,
-      bobSpeed: 1.5 + Math.random() * 2,
-      bobAmp: 0.08 + Math.random() * 0.1
+      bobSpeed: 1.4 + Math.random() * 1.8,
+      bobAmp: 0.06 + Math.random() * 0.09
     };
     bottleGroup.add(d);
     droplets.push(d);
   }
 
-  // ═══ MASTER PROPORTION FIT ═════════════════════════════
-  // Baseline scale of 0.62 guarantees the entire bottle from base
-  // to cap fits comfortably in the viewport without clipping!
+  // Baseline scale calibrated to fit viewport with luxury margins
   const BASELINE_SCALE = 0.62;
   bottleGroup.scale.set(BASELINE_SCALE, BASELINE_SCALE, BASELINE_SCALE);
 
   scene.add(bottleGroup);
 
-  // Initial Zero-G Hero Pose
+  // Levitating at a slight zero-gravity angle
   bottleGroup.position.x = 1.55;
   bottleGroup.position.y = 0.0;
   bottleGroup.rotation.y = -0.32;
-  bottleGroup.rotation.z = 0.10;
+  bottleGroup.rotation.z = 0.12;
 
   let targetX = 1.55;
   let targetY = 0.0;
   let targetRotY = -0.32;
-  let targetRotZ = 0.10;
+  let targetRotZ = 0.12;
   let targetScale = BASELINE_SCALE;
   let targetExplode = 0.0;
   let currentExplode = 0.0;
 
-  // ── Scroll Scrollytelling Choreography (Controlled & Contained) ──
+  // ── Scroll Scrollytelling Choreography ──────────────────
   function updateScrollChoreography() {
     const maxScroll = (document.documentElement.scrollHeight - window.innerHeight) || 1;
     const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
 
     if (progress < 0.24) {
-      // ── HERO: Entire bottle proudly framed on the right ──
+      // ── HERO: Center-right zero-g levitation ──
       const t = progress / 0.24;
       targetX = 1.55 - t * 0.2;
       targetY = 0.0;
       targetRotY = -0.32 + t * 0.55;
-      targetRotZ = 0.10 - t * 0.04;
+      targetRotZ = 0.12 - t * 0.04;
       targetScale = BASELINE_SCALE;
       targetExplode = 0.0;
     } else if (progress < 0.50) {
@@ -920,22 +894,22 @@ tailwind.config = {
       targetY = 0.05;
       targetRotY = 0.23 + t * 2.1;
       targetRotZ = 0.06 - Math.sin(t * Math.PI) * 0.18;
-      targetScale = BASELINE_SCALE * 0.95; // compact scale so fanned layers fit on screen
+      targetScale = BASELINE_SCALE * 0.95;
       targetExplode = Math.min(1.0, t * 1.4);
     } else if (progress < 0.76) {
       // ── HYDRATION OS & UV-C: Completely reassembled, glides to right ──
       const t = (progress - 0.50) / 0.26;
       targetX = -1.35 + t * 2.9; // returns to right side (x = 1.55)
-      targetY = -0.15; // slightly lower to keep glowing cap center-stage
+      targetY = -0.15;
       targetRotY = 2.33 + t * 1.6;
       targetRotZ = -0.12 + t * 0.22;
-      targetScale = BASELINE_SCALE * 1.05; // clean, controlled zoom that fits
-      targetExplode = Math.max(0.0, 1.0 - t * 3.0); // snaps shut instantly
+      targetScale = BASELINE_SCALE * 1.05;
+      targetExplode = Math.max(0.0, 1.0 - t * 3.0);
     } else {
       // ── BESPOKE CONFIGURATOR: Centers above configurator controls ──
       const t = (progress - 0.76) / 0.24;
       targetX = 1.55 - t * 1.55; // center x = 0
-      targetY = -0.15 + t * 0.55; // positions comfortably above swatches
+      targetY = -0.15 + t * 0.55;
       targetRotY = 3.93 + t * 1.5;
       targetRotZ = 0.10 - t * 0.12;
       targetScale = BASELINE_SCALE * 0.95;
@@ -962,10 +936,9 @@ tailwind.config = {
     const currentScale = bottleGroup.scale.x + (targetScale - bottleGroup.scale.x) * LERP_FACTOR;
     bottleGroup.scale.set(currentScale, currentScale, currentScale);
 
-    // Exploded view separation lerp (Controlled offsets)
+    // Exploded view separation lerp
     currentExplode += (targetExplode - currentExplode) * LERP_FACTOR;
 
-    // Symmetrical, contained separation
     chassisGroup.position.x = -currentExplode * 0.75;
     chassisGroup.position.z = currentExplode * 0.35;
 
@@ -1003,7 +976,7 @@ tailwind.config = {
   }
   animate();
 
-  // Responsive Dynamic Camera Adjustment (Guarantees bottle never clips)
+  // Dynamic Camera Distance Adjustment (Guarantees zero clipping)
   function adjustCamera() {
     const w = container.clientWidth || window.innerWidth;
     const h = container.clientHeight || window.innerHeight;
@@ -1011,17 +984,14 @@ tailwind.config = {
     camera.aspect = aspect;
 
     if (aspect < 1.0) {
-      // Mobile vertical view: pull camera back so bottle stays completely visible
       camera.position.z = 13.5;
       camera.fov = 40;
     } else if (h < 700) {
-      // Shallow laptop screen
       camera.position.z = 11.8;
-      camera.fov = 36;
+      camera.fov = 35;
     } else {
-      // Standard desktop
       camera.position.z = 10.5;
-      camera.fov = 36;
+      camera.fov = 35;
     }
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
@@ -1031,9 +1001,9 @@ tailwind.config = {
 
   // Global material updater for interactive finish customizer
   window.__setVesselColor = function(colorHex, labelText) {
-    const newTex = createTitaniumTexture(colorHex, labelText || 'sip2O');
-    titaniumChassisMat.map = newTex;
-    titaniumChassisMat.needsUpdate = true;
+    const newTex = createMatteBlackTexture(colorHex, labelText || 'sip2O');
+    matteBlackTitaniumMat.map = newTex;
+    matteBlackTitaniumMat.needsUpdate = true;
   };
 })();
 
@@ -1050,7 +1020,7 @@ function setVesselFinish(btn, colorHex) {
 // ── Interactive Laser Engraving Update ──────────────────
 document.getElementById('laserInput')?.addEventListener('input', function(e) {
   const activeBtn = document.querySelector('.finish-btn.active');
-  const color = activeBtn ? activeBtn.getAttribute('data-color') : '#141820';
+  const color = activeBtn ? activeBtn.getAttribute('data-color') : '#0c0e12';
   if (window.__setVesselColor) {
     window.__setVesselColor(color, e.target.value || 'sip2O');
   }
@@ -1062,10 +1032,10 @@ function setVesselVolume(vol) {
   const b950 = document.getElementById('vol-950');
   if (vol === 650) {
     b650.style.borderColor = '#00f0ff'; b650.style.background = 'rgba(0,240,255,0.08)';
-    b950.style.borderColor = 'rgba(255,255,255,0.08)'; b950.style.background = 'rgba(18,22,30,0.6)';
+    b950.style.borderColor = 'rgba(255,255,255,0.06)'; b950.style.background = 'rgba(16,20,28,0.5)';
   } else {
     b950.style.borderColor = '#00f0ff'; b950.style.background = 'rgba(0,240,255,0.08)';
-    b650.style.borderColor = 'rgba(255,255,255,0.08)'; b650.style.background = 'rgba(18,22,30,0.6)';
+    b650.style.borderColor = 'rgba(255,255,255,0.06)'; b650.style.background = 'rgba(16,20,28,0.5)';
   }
 }
 
